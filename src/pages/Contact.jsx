@@ -8,7 +8,7 @@ const Contact = () => {
         <section className='container '>
             <div className='grid grid-cols-4 gap-4'>
                 <div className='col-span-full md:col-span-2 p-2'>
-                    <h1 className='text-xl font-bold'>Orbitern.</h1>
+                    <h1 className='text-xl font-bold'>Fasilkom.</h1>
                     <div className='mt-10'>
                         <h1 className='text-3xl font-bold'>Get in touch with us</h1>
                         <p className='text-md'>Write your problem or message for us and we will get back to you.</p>
@@ -47,10 +47,10 @@ const Contact = () => {
                 <div className='hidden md:block md:col-span-2 min-h-32 p-4 relative'>
                     <div className='lg:w-[70%] min-h-full mx-auto bg-white rounded-3xl bg-cover bg-center relative shadow-xl shadow-neutral-300' style={{ backgroundImage: `url(${office})` }}>
                         <div className='w-24 h-16 bg-white rounded-br-3xl absolute -top-3 -left-5 flex items-center justify-center'>
-                            <p className='font-bold'>Orbitern</p>
+                            <p className='font-bold'>Fasilkom</p>
                         </div>
                         {/* <div className='w-24 h-16 bg-white rounded-tl-3xl absolute -bottom-3 -right-5 flex items-center justify-center'>
-                            <p className='font-bold'>Orbitern</p>
+                            <p className='font-bold'>Fasilkom</p>
                         </div> */}
                         <div className='w-64 bg-black p-2 bg-opacity-25 rounded-lg absolute bottom-12 left-1/2 transform -translate-x-1/2'>
                             <h1 className='text-white text-lg text-center font-bold'>Discovering the Best Internship for Your Career</h1>

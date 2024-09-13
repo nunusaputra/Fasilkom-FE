@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import CreateLoker from '../../pages/CompanyDashboard/CreateLoker'
+import DrawerMobile from '../../components/Drawer/DrawerMobile'
+import ApplicantList from '../../pages/TimMagangDashboard/ApplicantList'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
 
-const CreateLokerLayouts = () => {
+const ApplicantListLayouts = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
@@ -39,7 +39,7 @@ const CreateLokerLayouts = () => {
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <CreateLoker />
+                            <ApplicantList />
                         </section>
                     </main>
                 </>
@@ -48,4 +48,4 @@ const CreateLokerLayouts = () => {
     )
 }
 
-export default CreateLokerLayouts
+export default ApplicantListLayouts

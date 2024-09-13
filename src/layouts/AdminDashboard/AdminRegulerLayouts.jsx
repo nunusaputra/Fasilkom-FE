@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import AddNewLoker from '../../pages/CompanyDashboard/AddNewLoker'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
+import MagangReguler from '../../pages/AdminDashboard/MagangReguler'
 
-const AddNewLokerLayouts = () => {
+const AdminRegulerLayouts = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (user && user.role !== "mitra") {
+        if (user && user.role !== "admin") {
             navigate('/forbidden')
         }
     }, [user])
@@ -39,7 +39,7 @@ const AddNewLokerLayouts = () => {
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <AddNewLoker />
+                            <MagangReguler />
                         </section>
                     </main>
                 </>
@@ -48,4 +48,4 @@ const AddNewLokerLayouts = () => {
     )
 }
 
-export default AddNewLokerLayouts
+export default AdminRegulerLayouts

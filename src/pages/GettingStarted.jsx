@@ -9,7 +9,7 @@ const GettingStarted = () => {
         <div>
             <nav className='bg-white px-6 lg:px-24 py-3 sticky top-0'>
                 <Link to={"/"}>
-                    <div className='text-2xl font-extrabold'>Orbitern.</div>
+                    <div className='text-2xl font-extrabold'>Fasilkom.</div>
                 </Link>
             </nav>
             <section className='flex flex-col gap-2 justify-center items-center px-6 xl:px-0 text-center'>

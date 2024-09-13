@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import LogbookCompany from '../../pages/CompanyDashboard/LogbookCompany'
+import LogbookCompany from '../../pages/TimMagangDashboard/LogbookCompany'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUser } from '../../redux/Action/LoginAction'

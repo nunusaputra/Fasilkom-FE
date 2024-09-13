@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
+import ApplicantDetail from '../../pages/TimMagangDashboard/ApplicantDetail'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { getUser } from '../../redux/Action/LoginAction'
-import EditLoker from '../../pages/CompanyDashboard/EditLoker'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../../components/Loading'
-
-const EditLokerLayouts = () => {
+import { getApplicantId } from '../../redux/Action/ApplicantAction'
+const ApplicantDetailLayouts = () => {
+    const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
@@ -20,7 +20,11 @@ const EditLokerLayouts = () => {
     }, [user])
 
     useEffect(() => {
-        dispatch(getUser())
+        const data = {
+            id: id,
+            token: user.token
+        }
+        dispatch(getApplicantId(data))
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
@@ -39,7 +43,7 @@ const EditLokerLayouts = () => {
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <EditLoker />
+                            <ApplicantDetail />
                         </section>
                     </main>
                 </>
@@ -48,4 +52,4 @@ const EditLokerLayouts = () => {
     )
 }
 
-export default EditLokerLayouts
+export default ApplicantDetailLayouts

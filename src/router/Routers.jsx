@@ -14,22 +14,20 @@ import DospemLayouts from "../layouts/DashboardMhs/DospemLayouts";
 import AdminProfileLayouts from "../layouts/AdminDashboard/AdminProfileLayouts";
 import ChangePasswordLayouts from "../layouts/AdminDashboard/ChangePasswordLayouts";
 import CreateAccountLayouts from "../layouts/AdminDashboard/CreateAccountLayouts";
-import AdminLaporanLayouts from "../layouts/AdminDashboard/AdminLaporanLayouts";
-import PengajuanDospemLayouts from "../layouts/AdminDashboard/PengajuanDospemLayouts";
 import AdminInformationLayouts from "../layouts/AdminDashboard/AdminInformationLayouts";
-import CreateLokerLayouts from "../layouts/CompanyDashboard/CreateLokerLayouts";
-import AddNewLokerLayouts from "../layouts/CompanyDashboard/AddNewLokerLayouts";
-import ApplicantListLayouts from "../layouts/CompanyDashboard/ApplicantListLayouts";
-import ApplicantDetailLayouts from "../layouts/CompanyDashboard/ApplicantDetailLayouts";
-import LogbookCompanyLayouts from "../layouts/CompanyDashboard/LogbookCompanyLayouts";
+import CreateLokerLayouts from "../layouts/TimMagangDashboard/CreateLokerLayouts";
+import AddNewLokerLayouts from "../layouts/TimMagangDashboard/AddNewLokerLayouts";
+import ApplicantListLayouts from "../layouts/TimMagangDashboard/ApplicantListLayouts";
+import ApplicantDetailLayouts from "../layouts/TimMagangDashboard/ApplicantDetailLayouts";
+import LogbookCompanyLayouts from "../layouts/TimMagangDashboard/LogbookCompanyLayouts";
 import AdminLogin from "../pages/AdminLogin";
-import DetailLokerLayouts from "../layouts/CompanyDashboard/DetailLokerLayouts";
-import EditLokerLayouts from "../layouts/CompanyDashboard/EditLokerLayouts";
+import DetailLokerLayouts from "../layouts/TimMagangDashboard/DetailLokerLayouts";
+import EditLokerLayouts from "../layouts/TimMagangDashboard/EditLokerLayouts";
 import Forbidden from "../components/Forbidden";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import MitraProfileLayouts from "../layouts/CompanyDashboard/MitraProfileLayouts";
-import MitraDashboardLayouts from "../layouts/CompanyDashboard/MitraDashboardLayouts";
+import MitraProfileLayouts from "../layouts/TimMagangDashboard/MitraProfileLayouts";
+import MitraDashboardLayouts from "../layouts/TimMagangDashboard/MitraDashboardLayouts";
 import ServiceError from "../components/ServiceError";
 import LandingPageLayouts from "../layouts/LandingPageLayouts";
 import PageNotFound from "../components/PageNotFound";
@@ -38,6 +36,8 @@ import ContactLayout from "../layouts/ContactLayout";
 import { getMhs, refreshToken } from "../redux/Action/LoginMhsAction";
 import { refreshTokenUser } from "../redux/Action/LoginAction";
 import AdminDashboardLayouts from "../layouts/AdminDashboard/AdminDashboardLayouts";
+import AdminKomptensiLayouts from "../layouts/AdminDashboard/AdmiKompetensiLayouts";
+import AdminRegulerLayouts from "../layouts/AdminDashboard/AdminRegulerLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -143,8 +143,8 @@ const Routers = () => {
         <Route path="/admin-dashboard/profile/:id" element={<PrivateRouteUser><AdminProfileLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/change-password/:id" element={<PrivateRouteUser><ChangePasswordLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/create-account" element={<PrivateRouteUser><CreateAccountLayouts /></PrivateRouteUser>} />
-        <Route path="/admin-dashboard/laporan-magang" element={<PrivateRouteUser><AdminLaporanLayouts /></PrivateRouteUser>} />
-        <Route path="/admin-dashboard/dosen-pembimbing" element={<PrivateRouteUser><PengajuanDospemLayouts /></PrivateRouteUser>} />
+        <Route path="/admin-dashboard/magang-kompetensi" element={<PrivateRouteUser><AdminKomptensiLayouts /></PrivateRouteUser>} />
+        <Route path="/admin-dashboard/magang-reguler" element={<PrivateRouteUser><AdminRegulerLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/information" element={<PrivateRouteUser><AdminInformationLayouts /></PrivateRouteUser>} />
 
         {/* Company Dashboard */}

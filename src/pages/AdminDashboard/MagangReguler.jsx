@@ -10,7 +10,7 @@ import Pagination from '../../components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshTokenUser } from '../../redux/Action/LoginAction'
 
-const PengajuanDospem = () => {
+const MagangReguler = () => {
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.auth)
     const [list, setList] = useState([])
@@ -28,7 +28,7 @@ const PengajuanDospem = () => {
         const getList = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/dosen-pembimbing`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/magang-reguler`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -47,17 +47,13 @@ const PengajuanDospem = () => {
         getList()
     }, [])
 
-    // useEffect(() => {
-    //     dispatch(refreshTokenUser())
-    // }, [dispatch])
-
     return (
         <div className='px-4'>
             <div className='bg-slate-50 drop-shadow-xl rounded-lg p-4'>
                 <div className='flex flex-col gap-2'>
                     <div className=''>
-                        <h1 className='text-lg font-semibold'>Pengajuan Dosen Pembimbing</h1>
-                        <p className='text-xs sm:text-sm'>You can see all the supervisor's submissions here.</p>
+                        <h1 className='text-lg font-semibold'>Pengajuan Permohonan Magang Reguler</h1>
+                        <p className='text-xs sm:text-sm'>You can see all the magang reguler submissions here.</p>
                     </div>
                 </div>
                 <label htmlFor="" className='relative block mt-3'>
@@ -73,7 +69,7 @@ const PengajuanDospem = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>NPM</th>
-                                <th>Tempat Magang</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Action</th>
                             </tr>
@@ -114,12 +110,12 @@ const PengajuanDospem = () => {
                                                 <td>
                                                     {item.npm}
                                                 </td>
-                                                <td>{item.tempat_magang}</td>
+                                                <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>
-                                                    <div className='w-6 h-6 rounded-md bg-secondary text-white flex items-center cursor-pointer'>
-                                                        <FaTrashAlt className='text-sm mx-auto' />
-                                                    </div>
+                                                    <button className='px-4 py-2 rounded-md border border-black cursor-pointer hover:bg-black hover:text-white'>
+                                                        Detail
+                                                    </button>
                                                 </th>
                                             </tr>
                                         ))
@@ -139,7 +135,7 @@ const PengajuanDospem = () => {
                                         <td colSpan={50} className='text-center' style={{ height: '100px', verticalAlign: 'middle' }}>
                                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                                                 <DataNotFound>
-                                                    Not Data Submission
+                                                    Tidak ada pengajuan magang reguler
                                                 </DataNotFound>
                                             </div>
                                         </td>
@@ -162,4 +158,4 @@ const PengajuanDospem = () => {
     )
 }
 
-export default PengajuanDospem
+export default MagangReguler

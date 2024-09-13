@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Drawer from '../../components/Drawer/Drawer'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
-import ApplicantList from '../../pages/CompanyDashboard/ApplicantList'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { getUser } from '../../redux/Action/LoginAction'
+import MitraProfile from '../../pages/TimMagangDashboard/MitraProfile'
 import Loading from '../../components/Loading'
 
-const ApplicantListLayouts = () => {
+const MitraProfileLayouts = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
-
-    useEffect(() => {
-        if (user && user.role !== "mitra") {
-            navigate('/forbidden')
-        }
-    }, [user])
 
     useEffect(() => {
         dispatch(getUser())
@@ -27,6 +18,7 @@ const ApplicantListLayouts = () => {
             }, 2000);
         })
     }, [dispatch, isLoading])
+
     return (
         <div>
             {isLoading ? (
@@ -34,12 +26,12 @@ const ApplicantListLayouts = () => {
             ) : (
                 <>
                     <DrawerMobile />
-                    <main className='w-full min-h-screen'>
+                    <main className='w-full min-h-screen '>
                         <div className='hidden sm:block'>
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <ApplicantList />
+                            <MitraProfile />
                         </section>
                     </main>
                 </>
@@ -48,4 +40,4 @@ const ApplicantListLayouts = () => {
     )
 }
 
-export default ApplicantListLayouts
+export default MitraProfileLayouts

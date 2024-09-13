@@ -35,7 +35,7 @@ const MitraProfile = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/upload/${user.id}`, formData, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL_TIM}/upload/${user.id}`, formData, {
         headers: {
           Authorization: `Bearer ${user.token}`,
           'Content-Type': 'multipart/form-data',

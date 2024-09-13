@@ -85,7 +85,7 @@ const Navbar = ({ show, styling = "shadow-lg" }) => {
           </div>
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
             <div className="flex flex-shrink-0 items-center text-2xl font-extrabold ml-1">
-              Orbitern.
+              Fasilkom.
             </div>
             <div className="hidden md:ml-6 md:block">
               <div className="flex space-x-4">

@@ -24,7 +24,7 @@ const ApplicantDetail = () => {
 
     const handleAccept = async () => {
         try {
-            const response = await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/applications/status/${id}`, {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL_TIM}/applications/status/${id}`, {
                 status: "accepted",
                 dateOfJoining: new Date().toISOString()
             }, {
@@ -43,7 +43,7 @@ const ApplicantDetail = () => {
 
     const handleReject = async () => {
         try {
-            const response = await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/applications/status/${id}`, {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL_TIM}/applications/status/${id}`, {
                 status: "rejected",
             }, {
                 headers: {

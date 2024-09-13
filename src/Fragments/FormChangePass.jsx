@@ -31,7 +31,7 @@ const FormChangePass = () => {
         try {
             user.role === 'admin' ?
                 await axios.put(`${import.meta.env.VITE_API_URL_ADMIN}/change-pass/${id}`, input)
-                : await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/change-pass/${id}`, input)
+                : await axios.put(`${import.meta.env.VITE_API_URL_TIM}/change-pass/${id}`, input)
             toast.success('Success Update Password')
             setTimeout(() => {
                 window.location.reload()

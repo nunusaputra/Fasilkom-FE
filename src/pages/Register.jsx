@@ -9,7 +9,7 @@ const Register = () => {
         <>
             <nav className='bg-white px-6 lg:px-24 py-3 sticky top-0 z-10'>
                 <Link to={"/"}>
-                    <div className='text-2xl font-extrabold'>Orbitern.</div>
+                    <div className='text-2xl font-extrabold'>Fasilkom.</div>
                 </Link>
             </nav>
             <div className='py-10'>

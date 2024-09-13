@@ -10,7 +10,7 @@ import { foramterDate } from "../../utils/formaterDate"
 import Pagination from '../../components/Pagination'
 import { useSelector } from 'react-redux'
 
-const LaporanMagang = () => {
+const MagangKompetensi = () => {
     const { user } = useSelector((state) => state.auth)
     const [list, setList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -26,7 +26,7 @@ const LaporanMagang = () => {
         setIsLoading(true)
         const getList = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/laporan`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/magang-kompetensi`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -48,7 +48,7 @@ const LaporanMagang = () => {
             <div className='bg-slate-50 drop-shadow-xl rounded-lg p-4'>
                 <div className='flex flex-col gap-2'>
                     <div className=''>
-                        <h1 className='text-lg font-semibold'>Laporan Magang Mahasiswa</h1>
+                        <h1 className='text-lg font-semibold'>Pengajuan Magang Kompetensi</h1>
                         <p className='text-xs sm:text-sm'>You can see all student internship report here.</p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ const LaporanMagang = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>NPM</th>
-                                <th>Dosen Pembimbing</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Action</th>
                             </tr>
@@ -106,7 +106,7 @@ const LaporanMagang = () => {
                                                 <td>
                                                     {item.npm}
                                                 </td>
-                                                <td>{item.dosen_pembimbing}</td>
+                                                <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>
                                                     <div className='w-6 h-6 rounded-md bg-secondary text-white flex items-center cursor-pointer'>
@@ -131,7 +131,7 @@ const LaporanMagang = () => {
                                         <td colSpan={50} className='text-center' style={{ height: '100px', verticalAlign: 'middle' }}>
                                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                                                 <DataNotFound>
-                                                    Not Report Submission
+                                                    Tidak ada pengajuan magang kompetensi
                                                 </DataNotFound>
                                             </div>
                                         </td>
@@ -154,4 +154,4 @@ const LaporanMagang = () => {
     )
 }
 
-export default LaporanMagang
+export default MagangKompetensi

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import PengajuanDospem from '../../pages/AdminDashboard/PengajuanDospem'
+import CreateLoker from '../../pages/TimMagangDashboard/CreateLoker'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
 
-const PengajuanDospemLayouts = () => {
+const CreateLokerLayouts = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (user && user.role !== "admin") {
+        if (user && user.role !== "mitra") {
             navigate('/forbidden')
         }
     }, [user])
@@ -39,7 +39,7 @@ const PengajuanDospemLayouts = () => {
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <PengajuanDospem />
+                            <CreateLoker />
                         </section>
                     </main>
                 </>
@@ -48,4 +48,4 @@ const PengajuanDospemLayouts = () => {
     )
 }
 
-export default PengajuanDospemLayouts
+export default CreateLokerLayouts

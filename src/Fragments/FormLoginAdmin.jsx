@@ -46,7 +46,7 @@ const FormLoginAdmin = () => {
             if (user.role === 'admin') {
                 navigate("/admin-dashboard")
                 toast.success("Login Success")
-            } else if (user.role === 'mitra') {
+            } else if (user.role === 'tim-magang') {
                 navigate("/company-dashboard")
                 toast.success("Login Success")
             } else {

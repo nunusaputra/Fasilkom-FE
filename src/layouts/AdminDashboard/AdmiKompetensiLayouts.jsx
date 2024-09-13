@@ -1,37 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import DetailLoker from '../../pages/CompanyDashboard/DetailLoker'
+import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import { getJobId } from '../../redux/Action/CreateJobAction'
+import { useNavigate } from 'react-router-dom'
+import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
+import MagangKompetensi from '../../pages/AdminDashboard/MagangKompetensi'
 
-const DetailLokerLayouts = () => {
-    const { id } = useParams()
+const AdminKomptensiLayouts = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (user && user.role !== "mitra") {
+        if (user && user.role !== "admin") {
             navigate('/forbidden')
         }
     }, [user])
 
     useEffect(() => {
-        const data = {
-            id: id,
-            token: user.token
-        }
-        dispatch(getJobId(data))
+        dispatch(getUser())
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [isLoading, dispatch])
+    }, [dispatch, isLoading])
     return (
         <div>
             {isLoading ? (
@@ -44,7 +39,7 @@ const DetailLokerLayouts = () => {
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <DetailLoker />
+                            <MagangKompetensi />
                         </section>
                     </main>
                 </>
@@ -53,4 +48,4 @@ const DetailLokerLayouts = () => {
     )
 }
 
-export default DetailLokerLayouts
+export default AdminKomptensiLayouts

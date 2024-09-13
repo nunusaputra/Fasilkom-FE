@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
-import MitraDashboard from '../../pages/CompanyDashboard/MitraDashboard'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUser } from '../../redux/Action/LoginAction'
-import { useNavigate } from 'react-router-dom'
+import MitraDashboard from '../../pages/TimMagangDashboard/MitraDashboard'
 import Loading from '../../components/Loading'
 
 const MitraDashboardLayouts = () => {

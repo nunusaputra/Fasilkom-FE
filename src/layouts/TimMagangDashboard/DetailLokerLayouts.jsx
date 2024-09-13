@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import Drawer from '../../components/Drawer/Drawer'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
-import AdminProfile from '../../pages/AdminDashboard/AdminProfile'
+import Drawer from '../../components/Drawer/Drawer'
+import DetailLoker from '../../pages/TimMagangDashboard/DetailLoker'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getUser } from '../../redux/Action/LoginAction'
-import MitraProfile from '../../pages/CompanyDashboard/MitraProfile'
+import { getJobId } from '../../redux/Action/CreateJobAction'
 import Loading from '../../components/Loading'
 
-const MitraProfileLayouts = () => {
+const DetailLokerLayouts = () => {
+    const { id } = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        dispatch(getUser())
+        if (user && user.role !== "mitra") {
+            navigate('/forbidden')
+        }
+    }, [user])
+
+    useEffect(() => {
+        const data = {
+            id: id,
+            token: user.token
+        }
+        dispatch(getJobId(data))
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [dispatch, isLoading])
-
+    }, [isLoading, dispatch])
     return (
         <div>
             {isLoading ? (
@@ -28,12 +39,12 @@ const MitraProfileLayouts = () => {
             ) : (
                 <>
                     <DrawerMobile />
-                    <main className='w-full min-h-screen '>
+                    <main className='w-full min-h-screen'>
                         <div className='hidden sm:block'>
                             <Drawer />
                         </div>
                         <section className='sm:ml-20 sm:p-10'>
-                            <MitraProfile />
+                            <DetailLoker />
                         </section>
                     </main>
                 </>
@@ -42,4 +53,4 @@ const MitraProfileLayouts = () => {
     )
 }
 
-export default MitraProfileLayouts
+export default DetailLokerLayouts

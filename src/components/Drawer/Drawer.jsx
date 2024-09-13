@@ -133,10 +133,10 @@ const Drawer = () => {
                             <DrawerLink name="Account" isOpen={isOpen} path={"/admin-dashboard/create-account"}>
                                 <Square2StackIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
-                            <DrawerLink name="Dosen Pembimbing" isOpen={isOpen} path={"/admin-dashboard/dosen-pembimbing"}>
+                            <DrawerLink name="Dosen Pembimbing" isOpen={isOpen} path={"/admin-dashboard/magang-reguler"}>
                                 <DocumentCheckIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
-                            <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/admin-dashboard/laporan-magang"}>
+                            <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/admin-dashboard/magang-kompetensi"}>
                                 <ChartPieIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
                             <DrawerLink name="Profile" isOpen={isOpen} path={`/admin-dashboard/profile/${user && user.id}`}>
