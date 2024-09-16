@@ -9,6 +9,7 @@ import { foramterDate } from "../../utils/formaterDate"
 import Pagination from '../../components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshTokenUser } from '../../redux/Action/LoginAction'
+import { Link } from 'react-router-dom'
 
 const MagangReguler = () => {
     const dispatch = useDispatch()
@@ -113,9 +114,11 @@ const MagangReguler = () => {
                                                 <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>
-                                                    <button className='px-4 py-2 rounded-md border border-black cursor-pointer hover:bg-black hover:text-white'>
-                                                        Detail
-                                                    </button>
+                                                    <a href={`/admin-dashboard/magang-reguler/${item.id}`}>
+                                                        <button className='px-4 py-2 rounded-md border border-black cursor-pointer hover:bg-black hover:text-white'>
+                                                            Detail
+                                                        </button>
+                                                    </a>
                                                 </th>
                                             </tr>
                                         ))

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import people from '../../assets/img/student-2.jpg'
 import { PaperClipIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import blank from '../../assets/img/blank.png'
-import { getApplicantId } from '../../redux/Action/ApplicantAction'
 
 const color = {
     "applied": "bg-blue-500",

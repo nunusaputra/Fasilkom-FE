@@ -122,7 +122,8 @@ const Drawer = () => {
                     </button>
                 </div>
                 <div className="flex flex-col gap-8 mt-8">
-                    {user && user.role === "admin" ? (
+                    {/* Admin Routes */}
+                    {user && user.role === "admin" && (
                         <>
                             <DrawerLink name="Dashboard" isOpen={isOpen} path={"/admin-dashboard"}>
                                 <ChartBarIcon className="text-white min-w-8 w-8" />
@@ -133,17 +134,44 @@ const Drawer = () => {
                             <DrawerLink name="Account" isOpen={isOpen} path={"/admin-dashboard/create-account"}>
                                 <Square2StackIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
-                            <DrawerLink name="Dosen Pembimbing" isOpen={isOpen} path={"/admin-dashboard/magang-reguler"}>
+                            <DrawerLink name="Magang Reguler" isOpen={isOpen} path={"/admin-dashboard/magang-reguler"}>
                                 <DocumentCheckIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
-                            <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/admin-dashboard/magang-kompetensi"}>
+                            <DrawerLink name="Magang Kompetensi" isOpen={isOpen} path={"/admin-dashboard/magang-kompetensi"}>
                                 <ChartPieIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
                             <DrawerLink name="Profile" isOpen={isOpen} path={`/admin-dashboard/profile/${user && user.id}`}>
                                 <UsersIcon className="text-white min-w-8 w-8" />
                             </DrawerLink>
                         </>
-                    ) : (
+                    )}
+
+                    {/* Kaprodi Routes */}
+                    {user && user.role === "kaprodi" && (
+                        <>
+                            <DrawerLink name="Dashboard" isOpen={isOpen} path={"/kaprodi-dashboard"}>
+                                <ChartBarIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                            <DrawerLink name="Pengajuan Magang Reguler" isOpen={isOpen} path={"/kaprodi-dashboard/magang-reguler"}>
+                                <SpeakerWaveIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                            <DrawerLink name="Pengajuan Magang Kompetensi" isOpen={isOpen} path={"/kaprodi-dashboard/magang-kompetensi"}>
+                                <Square2StackIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                            <DrawerLink name="Pengajuan Dosen Pembimbing" isOpen={isOpen} path={"/kaprodi-dashboard/dosen-pembimbing"}>
+                                <DocumentCheckIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                            <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/kaprodi-dashboard/laporan"}>
+                                <ChartPieIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                            <DrawerLink name="Profile" isOpen={isOpen} path={`/kaprodi-dashboard/profile/${user && user.id}`}>
+                                <UsersIcon className="text-white min-w-8 w-8" />
+                            </DrawerLink>
+                        </>
+                    )}
+
+                    {/* Tim Magang Routes */}
+                    {user && user.role === "tim-magang" && (
                         <>
                             <DrawerLink name="Dashboard" isOpen={isOpen} path={"/company-dashboard"}>
                                 <ChartBarIcon className="text-white min-w-8 w-8" />

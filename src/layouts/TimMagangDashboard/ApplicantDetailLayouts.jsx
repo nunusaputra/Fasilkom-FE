@@ -14,7 +14,7 @@ const ApplicantDetailLayouts = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (user && user.role !== "mitra") {
+        if (user && user.role !== "tim-magang") {
             navigate('/forbidden')
         }
     }, [user])

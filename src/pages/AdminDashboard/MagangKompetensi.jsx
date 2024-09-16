@@ -9,6 +9,7 @@ import DataNotFound from '../../components/DataNotFound'
 import { foramterDate } from "../../utils/formaterDate"
 import Pagination from '../../components/Pagination'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const MagangKompetensi = () => {
     const { user } = useSelector((state) => state.auth)
@@ -109,9 +110,11 @@ const MagangKompetensi = () => {
                                                 <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>
-                                                    <div className='w-6 h-6 rounded-md bg-secondary text-white flex items-center cursor-pointer'>
-                                                        <FaTrashAlt className='text-sm mx-auto' />
-                                                    </div>
+                                                    <Link to={`/admin-dashboard/magang-kompetensi/${item.id}`}>
+                                                        <button className='px-4 py-2 rounded-md border border-black cursor-pointer hover:bg-black hover:text-white'>
+                                                            Detail
+                                                        </button>
+                                                    </Link>
                                                 </th>
                                             </tr>
                                         ))

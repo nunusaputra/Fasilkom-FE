@@ -38,6 +38,14 @@ import { refreshTokenUser } from "../redux/Action/LoginAction";
 import AdminDashboardLayouts from "../layouts/AdminDashboard/AdminDashboardLayouts";
 import AdminKomptensiLayouts from "../layouts/AdminDashboard/AdmiKompetensiLayouts";
 import AdminRegulerLayouts from "../layouts/AdminDashboard/AdminRegulerLayouts";
+import AdminRegulerDetailLayouts from "../layouts/AdminDashboard/AdminRegulerDetailLayouts";
+import AdminKompetensiDetailLayouts from "../layouts/AdminDashboard/AdminKompetensiDetailLayouts";
+import KaprodiDashboardLayouts from "../layouts/KaprodiDashboard/KaprodiDashboardLayouts";
+import KaprodiProfileLayouts from "../layouts/KaprodiDashboard/KaprodiProfileLayouts";
+import KaprodiRegulerLayouts from "../layouts/KaprodiDashboard/KaprodiRegulerLayouts";
+import KaprodiKompetensiLayouts from "../layouts/KaprodiDashboard/KaprodiKompetensiLayouts";
+import KaprodiLaporanLayouts from "../layouts/KaprodiDashboard/KaprodiLaporanLayouts";
+import KaprodiDospemLayouts from "../layouts/KaprodiDashboard/KaprodiDospemLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -144,8 +152,18 @@ const Routers = () => {
         <Route path="/admin-dashboard/change-password/:id" element={<PrivateRouteUser><ChangePasswordLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/create-account" element={<PrivateRouteUser><CreateAccountLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/magang-kompetensi" element={<PrivateRouteUser><AdminKomptensiLayouts /></PrivateRouteUser>} />
+        <Route path="/admin-dashboard/magang-kompetensi/:id" element={<PrivateRouteUser><AdminKompetensiDetailLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/magang-reguler" element={<PrivateRouteUser><AdminRegulerLayouts /></PrivateRouteUser>} />
+        <Route path="/admin-dashboard/magang-reguler/:id" element={<PrivateRouteUser><AdminRegulerDetailLayouts /></PrivateRouteUser>} />
         <Route path="/admin-dashboard/information" element={<PrivateRouteUser><AdminInformationLayouts /></PrivateRouteUser>} />
+
+        {/* Dashboard Kaprodi */}
+        <Route path="/kaprodi-dashboard" element={<PrivateRouteUser><KaprodiDashboardLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/profile/:id" element={<PrivateRouteUser><KaprodiProfileLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/magang-reguler" element={<PrivateRouteUser><KaprodiRegulerLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/magang-kompetensi" element={<PrivateRouteUser><KaprodiKompetensiLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/laporan" element={<PrivateRouteUser><KaprodiLaporanLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/dosen-pembimbing" element={<PrivateRouteUser><KaprodiDospemLayouts /></PrivateRouteUser>} />
 
         {/* Company Dashboard */}
         <Route path="/company-dashboard" element={<PrivateRouteUser><MitraDashboardLayouts /></PrivateRouteUser>} />

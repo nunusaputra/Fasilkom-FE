@@ -3,12 +3,10 @@ import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
 import MagangReguler from '../../pages/AdminDashboard/MagangReguler'
 
 const AdminRegulerLayouts = () => {
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
@@ -20,13 +18,12 @@ const AdminRegulerLayouts = () => {
     }, [user])
 
     useEffect(() => {
-        dispatch(getUser())
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [dispatch, isLoading])
+    }, [isLoading])
     return (
         <div>
             {isLoading ? (

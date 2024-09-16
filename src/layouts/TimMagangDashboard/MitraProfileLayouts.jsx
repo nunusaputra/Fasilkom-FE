@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import Drawer from '../../components/Drawer/Drawer'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
-import { useDispatch } from 'react-redux'
-import { getUser } from '../../redux/Action/LoginAction'
 import MitraProfile from '../../pages/TimMagangDashboard/MitraProfile'
 import Loading from '../../components/Loading'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const MitraProfileLayouts = () => {
-    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        dispatch(getUser())
+        if (user && user.role !== "tim-magang") {
+            navigate('/forbidden')
+        }
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [dispatch, isLoading])
+    }, [isLoading, user, navigate])
 
     return (
         <div>
