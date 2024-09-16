@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Tables from '../../components/Tables'
 import { IoSearchOutline } from 'react-icons/io5'
 import axios from 'axios'
-import { FaTrashAlt } from 'react-icons/fa'
 import { HashLoader } from 'react-spinners'
 import DataNotFound from '../../components/DataNotFound'
 import { foramterDate } from "../../utils/formaterDate"
 import Pagination from '../../components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
-import { refreshTokenUser } from '../../redux/Action/LoginAction'
-import { Link } from 'react-router-dom'
+
 
 const MagangReguler = () => {
     const dispatch = useDispatch()
@@ -70,6 +68,7 @@ const MagangReguler = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>NPM</th>
+                                <th>Program Studi</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Action</th>
@@ -111,6 +110,7 @@ const MagangReguler = () => {
                                                 <td>
                                                     {item.npm}
                                                 </td>
+                                                <td>{item.Mahasiswa.prodi}</td>
                                                 <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>

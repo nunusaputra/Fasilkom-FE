@@ -1,10 +1,8 @@
-import axios from 'axios'
+import { PaperClipIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import blank from '../../assets/img/blank.png'
 import { HashLoader } from 'react-spinners'
 
 const color = {
@@ -13,7 +11,7 @@ const color = {
     "rejected": "bg-third",
 }
 
-const KompetensiDetail = () => {
+const KaprodiLaporanDetail = () => {
     const { id } = useParams()
     const { user } = useSelector(state => state.auth)
     const [data, setData] = useState(null)
@@ -22,7 +20,7 @@ const KompetensiDetail = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/magang-kompetensi/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL_KAPRODI}/laporan/${id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -51,7 +49,7 @@ const KompetensiDetail = () => {
                 <div className='bg-slate-50 rounded-lg drop-shadow-lg p-4'>
                     <div className=''>
                         {/* Back Section */}
-                        <Link to={'/admin-dashboard/magang-kompetensi'}>
+                        <Link to={'/kaprodi-dashboard/laporan'}>
                             <div className='flex gap-2 mb-5 group underline-hover cursor-pointer relative sm:hover:font-bold w-[60%] lg:w-[18%]'>
                                 <IoIosArrowRoundBack className='text-3xl group-hover:-rotate-45 transition ease-in duration-200' />
                                 <h1 className='text-sm self-center'>Back to previous page</h1>
@@ -59,8 +57,8 @@ const KompetensiDetail = () => {
                         </Link>
                         <div className='flex flex-col sm:flex-row gap-2 justify-between'>
                             <div className='flex flex-col gap-2'>
-                                <h1 className='text-lg font-bold'>Pengajuan Magang Kompetensi Information</h1>
-                                <p className='text-sm text-slate-500'>You can see about submission detail here.</p>
+                                <h1 className='text-lg font-bold'>Detail Laporan Magang Mahasiswa</h1>
+                                <p className='text-sm text-slate-500'>You can see about internship report detail here.</p>
                             </div>
                             <div className={`sm:self-center px-4 py-2 ${color[data.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
                                 {data.status}
@@ -102,62 +100,140 @@ const KompetensiDetail = () => {
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Data Anggota
+                                        Dosen Pembimbing
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.anggota}
+                                            {data.dosen_pembimbing}
                                         </span>
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Nama Kompetisi
+                                        Komentar Dosen Pembimbing
+                                    </dt>
+                                    <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
+                                        {data.comment}
+                                    </dd>
+                                </div>
+                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                    <dt className="text-sm leading-6 text-gray-900 font-bold">
+                                        Tempat Magang
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.nama_kompetisi}
+                                            {data.tempat_magang}
                                         </span>
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Tanggal Masa Kompetisi
+                                        Alamat Magang
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.tanggal_kompetisi}
+                                            {data.alamat_magang}
                                         </span>
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Tingkat Kompetisi
+                                        Longitude Magang
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.tingkat_kompetisi}
+                                            {data.longitude_magang}
                                         </span>
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Link Website / Media Sosisal Penyelenggara
+                                        Latitude Magang
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <a href={`${data.linkWeb}`} target="_blank" rel="noopener noreferrer">
+                                        <span className="text-primaryColor hover:underline hover:decoration-solid">
+                                            {data.latitude_magang}
+                                        </span>
+                                    </dd>
+                                </div>
+                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                    <dt className="text-sm font-medium leading-6 text-gray-900">
+                                        Lembar Pengesahan
+                                    </dt>
+                                    <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <ul
+                                            role="list"
+                                            className="divide-y divide-gray-100 rounded-md border border-gray-200"
+                                        >
+                                            <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                                <div className="flex w-0 flex-1 items-center">
+                                                    <PaperClipIcon
+                                                        className="h-5 w-5 flex-shrink-0 text-gray-400"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                                        <span className="truncate font-medium">
+                                                            Lembar_Pengesahan_{data.Mahasiswa.name}.pdf
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="ml-4 flex-shrink-0">
+                                                    <a
+                                                        href={`${data.lembar_pengesahan}`}
+                                                        className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+                                                        target="_blank"
+                                                    >
+                                                        Download
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </div>
+                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                    <dt className="text-sm font-medium leading-6 text-gray-900">
+                                        Laporan Magang
+                                    </dt>
+                                    <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                        <ul
+                                            role="list"
+                                            className="divide-y divide-gray-100 rounded-md border border-gray-200"
+                                        >
+                                            <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                                <div className="flex w-0 flex-1 items-center">
+                                                    <PaperClipIcon
+                                                        className="h-5 w-5 flex-shrink-0 text-gray-400"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
+                                                        <span className="truncate font-medium">
+                                                            Laporan_Magang_{data.Mahasiswa.name}.pdf
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="ml-4 flex-shrink-0">
+                                                    <a
+                                                        href={`${data.laporan_magang}`}
+                                                        className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+                                                        target="_blank"
+                                                    >
+                                                        Download
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </div>
+                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                    <dt className="text-sm leading-6 text-gray-900 font-bold">
+                                        Dokumentasi Magang
+                                    </dt>
+                                    <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                        <a href={`${data.dokumentasi}`} target="_blank" rel="noopener noreferrer">
                                             <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                                {data.linkWeb}
+                                                {data.dokumentasi}
                                             </span>
                                         </a>
-                                    </dd>
-                                </div>
-                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Bidang Minat
-                                    </dt>
-                                    <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
-                                        {data.bidang_minat}
                                     </dd>
                                 </div>
                             </dl>
@@ -169,4 +245,4 @@ const KompetensiDetail = () => {
     )
 }
 
-export default KompetensiDetail
+export default KaprodiLaporanDetail

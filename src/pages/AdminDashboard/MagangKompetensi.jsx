@@ -66,6 +66,7 @@ const MagangKompetensi = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>NPM</th>
+                                <th>Program Studi</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Action</th>
@@ -107,6 +108,7 @@ const MagangKompetensi = () => {
                                                 <td>
                                                     {item.npm}
                                                 </td>
+                                                <td>{item.Mahasiswa.prodi}</td>
                                                 <td>{item.status}</td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>

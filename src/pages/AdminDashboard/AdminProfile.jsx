@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FormProfileAdmin from '../../Fragments/FormProfileAdmin';
-import pattern from "../../assets/img/pattern-2.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../redux/Action/LoginAction';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { HashLoader } from 'react-spinners';
@@ -10,7 +8,6 @@ import blank from '../../assets/img/blank.png';
 
 
 const AdminProfile = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

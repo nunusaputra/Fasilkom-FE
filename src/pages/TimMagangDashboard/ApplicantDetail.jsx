@@ -15,7 +15,6 @@ const color = {
 
 const ApplicantDetail = () => {
     const { id } = useParams()
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const { isLoading, applicant } = useSelector(state => state.app)

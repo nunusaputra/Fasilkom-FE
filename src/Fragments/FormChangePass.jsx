@@ -29,9 +29,18 @@ const FormChangePass = () => {
         e.preventDefault()
         setLoading(true)
         try {
-            user.role === 'admin' ?
+            if (user.role === 'admin') {
                 await axios.put(`${import.meta.env.VITE_API_URL_ADMIN}/change-pass/${id}`, input)
-                : await axios.put(`${import.meta.env.VITE_API_URL_TIM}/change-pass/${id}`, input)
+            } else if (user.role === 'tim-magang') {
+                await axios.put(`${import.meta.env.VITE_API_URL_TIM}/change-pass/${id}`, input)
+            } else if (user.role === 'kaprodi') {
+                await axios.put(`${import.meta.env.VITE_API_URL_KAPRODI}/change-pass/${id}`, input)
+            } else if (user.role === 'dospem') {
+                await axios.put(`${import.meta.env.VITE_API_URL_DOSPEM}/change-pass/${id}`, input)
+            } else {
+                await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/change-pass/${id}`, input)
+
+            }
             toast.success('Success Update Password')
             setTimeout(() => {
                 window.location.reload()

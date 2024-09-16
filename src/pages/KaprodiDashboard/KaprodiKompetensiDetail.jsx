@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import blank from '../../assets/img/blank.png'
 import { HashLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 const color = {
     "waiting": "bg-yellow-500",
@@ -13,16 +12,52 @@ const color = {
     "rejected": "bg-third",
 }
 
-const KompetensiDetail = () => {
+const KaprodiKompetensiDetail = () => {
     const { id } = useParams()
     const { user } = useSelector(state => state.auth)
     const [data, setData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
+    const handleAccept = async () => {
+        try {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL_KAPRODI}/magang-kompetensi/${id}`, {
+                status: "accepted"
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            })
+            toast.success(response.data.message)
+            navigate('/kaprodi-dashboard/magang-kompetensi')
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message)
+            }
+        }
+    }
+
+    const handleReject = async () => {
+        try {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL_KAPRODI}/magang-kompetensi/${id}`, {
+                status: "rejected",
+            }, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            })
+            toast.success(response.data.message)
+            navigate('/kaprodi-dashboard/magang-kompetensi')
+        } catch (error) {
+            if (error.response) {
+                toast.error(error.response.data.message)
+            }
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/magang-kompetensi/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL_KAPRODI}/magang-kompetensi/${id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -51,7 +86,7 @@ const KompetensiDetail = () => {
                 <div className='bg-slate-50 rounded-lg drop-shadow-lg p-4'>
                     <div className=''>
                         {/* Back Section */}
-                        <Link to={'/admin-dashboard/magang-kompetensi'}>
+                        <Link to={'/kaprodi-dashboard/magang-kompetensi'}>
                             <div className='flex gap-2 mb-5 group underline-hover cursor-pointer relative sm:hover:font-bold w-[60%] lg:w-[18%]'>
                                 <IoIosArrowRoundBack className='text-3xl group-hover:-rotate-45 transition ease-in duration-200' />
                                 <h1 className='text-sm self-center'>Back to previous page</h1>
@@ -163,10 +198,24 @@ const KompetensiDetail = () => {
                             </dl>
                         </div>
                     </div>
+
+                    {/* Button Action */}
+                    <div className='mt-5'>
+                        <div className='flex flex-col-reverse gap-2 sm:justify-start sm:flex-row-reverse'>
+                            <button className='px-4 py-2 bg-secondary text-white font-semibold rounded-lg'
+                                onClick={handleReject}>
+                                Rejected
+                            </button>
+                            <button className='px-4 py-2 border border-secondary text-secondary font-semibold rounded-lg hover:bg-secondary hover:text-white'
+                                onClick={handleAccept}>
+                                Accept
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
     )
 }
 
-export default KompetensiDetail
+export default KaprodiKompetensiDetail
