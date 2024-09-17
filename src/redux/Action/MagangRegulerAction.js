@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const url = import.meta.env.VITE_URL_API_KAPRODI;
+const url = import.meta.env.VITE_API_URL_KAPRODI;
 
 export const getMagangReguler = createAsyncThunk(
   "kaprodi/magangReguler",

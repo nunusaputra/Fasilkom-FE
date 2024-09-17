@@ -31,7 +31,7 @@ const containerVariants = {
         },
     },
     open: {
-        width: "16rem",
+        width: "22rem",
         transition: {
             type: "spring",
             damping: 15,

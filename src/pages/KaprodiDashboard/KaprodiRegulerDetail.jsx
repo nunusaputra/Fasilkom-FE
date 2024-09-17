@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { getMagangRegulerById } from '../../redux/Action/MagangRegulerAction'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import blank from '../../assets/img/blank.png'
+import { foramterDate } from '../../utils/formaterDate'
 
 const color = {
     "waiting": "bg-yellow-500",
@@ -15,9 +16,10 @@ const color = {
 
 const KaprodiRegulerDetail = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { id } = useParams()
     const { user } = useSelector(state => state.auth)
-    const [isLoading, magang] = useSelector(state => state.magang)
+    const { isLoading, magang } = useSelector(state => state.magang)
 
     const handleAccept = async () => {
         try {
@@ -54,15 +56,6 @@ const KaprodiRegulerDetail = () => {
             }
         }
     }
-
-
-    useEffect(() => {
-        const magang = {
-            id: id,
-            token: user.token
-        }
-        dispatch(getMagangRegulerById(magang))
-    }, [id, user.token])
 
     return (
         <div className='px-4'>
@@ -101,7 +94,7 @@ const KaprodiRegulerDetail = () => {
                                 }}
                             />
                             <div className='flex flex-col gap-2 self-center'>
-                                <h1 className='text-lg font-semibold lg:text-xl'>{magang.nama}</h1>
+                                <h1 className='text-lg font-semibold lg:text-xl'>{magang.nama} ({magang.Mahasiswa.prodi})</h1>
                                 <p className='text-sm text-slate-500'>{magang.Mahasiswa.email}</p>
                             </div>
                         </div>

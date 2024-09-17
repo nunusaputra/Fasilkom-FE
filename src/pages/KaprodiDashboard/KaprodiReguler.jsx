@@ -8,6 +8,7 @@ import DataNotFound from '../../components/DataNotFound'
 import { Link } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
 import { foramterDate } from '../../utils/formaterDate'
+import { color } from '../../assets/data/color'
 
 const KaprodiReguler = () => {
     const dispatch = useDispatch()
@@ -90,8 +91,20 @@ const KaprodiReguler = () => {
                                                 <td>
                                                     {item.npm}
                                                 </td>
-                                                <td>{item.Mahasiswa.prodi}</td>
-                                                <td>{item.status}</td>
+                                                <td>
+                                                    <span
+                                                        className={`px-4 py-2 rounded-lg font-bold text-white ${item.Mahasiswa.prodi === "Informatika" ? 'bg-blue-500' : 'bg-orange-500'}`}
+                                                    >
+                                                        {item.Mahasiswa.prodi}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        className={`px-4 py-2 ${color[item.status]} rounded-lg text-white font-bold`}
+                                                    >
+                                                        {item.status}
+                                                    </span>
+                                                </td>
                                                 <td>{foramterDate(item.createdAt)}</td>
                                                 <th className=''>
                                                     <Link to={`/kaprodi-dashboard/magang-reguler/${item.id}`}>

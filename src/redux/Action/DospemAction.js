@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const url = import.meta.env.VITE_URL_API_KAPRODI;
+const url = import.meta.env.VITE_API_URL_KAPRODI;
 
 export const getDospem = createAsyncThunk(
   "kaprodi/dospem",
   async (token, thunkAPI) => {
     try {
-      const response = await axios.get(`${url}/dospem`, {
+      const response = await axios.get(`${url}/dosen-pembimbing`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -26,7 +26,7 @@ export const getDospemById = createAsyncThunk(
   "kaprodi/dospemId",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.get(`${url}/dospem/${data.id}`, {
+      const response = await axios.get(`${url}/dosen-pembimbing/${data.id}`, {
         headers: {
           Authorization: `Bearer ${data.token}`,
         },
@@ -46,9 +46,10 @@ export const updateDospem = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.put(
-        `${url}/dospem/${data.id}`,
+        `${url}/dosen-pembimbing/${data.id}`,
         {
           dospemId: data.dospemId,
+          status: "accepted",
         },
         {
           headers: {

@@ -1,9 +1,11 @@
 import { PaperClipIcon } from '@heroicons/react/24/outline'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
+import blank from '../../assets/img/blank.png'
 
 const color = {
     "waiting": "bg-yellow-500",
@@ -76,7 +78,7 @@ const KaprodiLaporanDetail = () => {
                                 }}
                             />
                             <div className='flex flex-col gap-2 self-center'>
-                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama}</h1>
+                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama} ({data.Mahasiswa.prodi})</h1>
                                 <p className='text-sm text-slate-500'>{data.Mahasiswa.email}</p>
                             </div>
                         </div>
@@ -113,7 +115,7 @@ const KaprodiLaporanDetail = () => {
                                         Komentar Dosen Pembimbing
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
-                                        {data.comment}
+                                        {data.comment === null ? 'Tidak ada komentar dari dosen pembimbing' : data.comment}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -157,7 +159,19 @@ const KaprodiLaporanDetail = () => {
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt className="text-sm font-medium leading-6 text-gray-900">
+                                    <dt className="text-sm leading-6 text-gray-900 font-bold">
+                                        Dokumentasi Magang
+                                    </dt>
+                                    <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                        <a href={`${data.dokumentasi}`} target="_blank" rel="noopener noreferrer">
+                                            <span className="text-primaryColor hover:underline hover:decoration-solid">
+                                                {data.dokumentasi}
+                                            </span>
+                                        </a>
+                                    </dd>
+                                </div>
+                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                    <dt className="text-sm font-bold leading-6 text-gray-900">
                                         Lembar Pengesahan
                                     </dt>
                                     <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -191,7 +205,7 @@ const KaprodiLaporanDetail = () => {
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt className="text-sm font-medium leading-6 text-gray-900">
+                                    <dt className="text-sm font-bold leading-6 text-gray-900">
                                         Laporan Magang
                                     </dt>
                                     <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -222,18 +236,6 @@ const KaprodiLaporanDetail = () => {
                                                 </div>
                                             </li>
                                         </ul>
-                                    </dd>
-                                </div>
-                                <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                    <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        Dokumentasi Magang
-                                    </dt>
-                                    <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <a href={`${data.dokumentasi}`} target="_blank" rel="noopener noreferrer">
-                                            <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                                {data.dokumentasi}
-                                            </span>
-                                        </a>
                                     </dd>
                                 </div>
                             </dl>

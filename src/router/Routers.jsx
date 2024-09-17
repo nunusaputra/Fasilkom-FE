@@ -46,6 +46,10 @@ import KaprodiRegulerLayouts from "../layouts/KaprodiDashboard/KaprodiRegulerLay
 import KaprodiKompetensiLayouts from "../layouts/KaprodiDashboard/KaprodiKompetensiLayouts";
 import KaprodiLaporanLayouts from "../layouts/KaprodiDashboard/KaprodiLaporanLayouts";
 import KaprodiDospemLayouts from "../layouts/KaprodiDashboard/KaprodiDospemLayouts";
+import KaprodiRegulerDetialLayouts from "../layouts/KaprodiDashboard/KaprodiRegulerDetialLayouts";
+import KaprodiDospemDetailLayouts from "../layouts/KaprodiDashboard/KaprodiDospemDetailLayouts";
+import KaprodiLaporanDetailLayouts from "../layouts/KaprodiDashboard/KaprodiLaporanDetailLayouts";
+import KaprodiKompetensiDetailLayouts from "../layouts/KaprodiDashboard/KaprodiKompetensiDetailLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -161,9 +165,13 @@ const Routers = () => {
         <Route path="/kaprodi-dashboard" element={<PrivateRouteUser><KaprodiDashboardLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/profile/:id" element={<PrivateRouteUser><KaprodiProfileLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/magang-reguler" element={<PrivateRouteUser><KaprodiRegulerLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/magang-reguler/:id" element={<PrivateRouteUser><KaprodiRegulerDetialLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/magang-kompetensi" element={<PrivateRouteUser><KaprodiKompetensiLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/magang-kompetensi/:id" element={<PrivateRouteUser><KaprodiKompetensiDetailLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/laporan" element={<PrivateRouteUser><KaprodiLaporanLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/laporan/:id" element={<PrivateRouteUser><KaprodiLaporanDetailLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/dosen-pembimbing" element={<PrivateRouteUser><KaprodiDospemLayouts /></PrivateRouteUser>} />
+        <Route path="/kaprodi-dashboard/dosen-pembimbing/:id" element={<PrivateRouteUser><KaprodiDospemDetailLayouts /></PrivateRouteUser>} />
 
         {/* Company Dashboard */}
         <Route path="/company-dashboard" element={<PrivateRouteUser><MitraDashboardLayouts /></PrivateRouteUser>} />

@@ -1,11 +1,12 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { getMagangReguler } from '../../redux/Action/MagangRegulerAction'
 import { getDospem } from '../../redux/Action/DospemAction'
 import { AdjustmentsHorizontalIcon, ArrowLongRightIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 import DataNotFound from '../../components/DataNotFound'
+import people from '../../assets/img/people-6.jpg'
 
 const MainSectionKaprodi = () => {
     const dispatch = useDispatch()
@@ -44,12 +45,12 @@ const MainSectionKaprodi = () => {
                             <AdjustmentsHorizontalIcon className='w-7 h-7' />
                             <h1 className='text-lg font-semibold'>Magang Reguler</h1>
                         </div>
-                        <Link to={'/kaprodi-dashboard/magang-reguler'}>
+                        <a href={'/kaprodi-dashboard/magang-reguler'}>
                             <div className='px-4 py-2 rounded-lg text-black flex gap-2 hover:bg-blue-500 hover:text-white transition-colors ease-in-out duration-200 cursor-pointer'>
                                 <button className='text-sm font-semibold'>View More</button>
                                 <ArrowLongRightIcon className='w-5' />
                             </div>
-                        </Link>
+                        </a>
                     </div>
                     <div className="mt-2 grid grid-cols-1 gap-4 lg:grid-cols-2">
                         {isLoading ? (
@@ -64,7 +65,7 @@ const MainSectionKaprodi = () => {
                                             <img src={item.Mahasiswa.profile_pict ? item.Mahasiswa.profile_pict : people} alt="" className='w-22' />
                                         </div>
                                         <div className='text-center'>
-                                            <h1 className='text-lg font-semibold'>{item.name}</h1>
+                                            <h1 className='text-lg font-semibold'>{item.nama}</h1>
                                             <h2 className='text-md -mt-1'>{item.Mahasiswa.prodi}</h2>
                                         </div>
                                     </div>
@@ -83,12 +84,12 @@ const MainSectionKaprodi = () => {
                             <UsersIcon className='w-7 h-7' />
                             <h1 className='text-lg font-semibold'>Dosen Pembimbing</h1>
                         </div>
-                        <Link to={'/kaprodi-dashboard/dosen-pembimbing'}>
+                        <a href={'/kaprodi-dashboard/dosen-pembimbing'}>
                             <div className='px-4 py-2 rounded-lg text-black flex gap-2 hover:bg-blue-500 hover:text-white transition-colors ease-in-out duration-200 cursor-pointer'>
                                 <p className='text-sm font-semibold'>View More</p>
                                 <ArrowLongRightIcon className='w-5' />
                             </div>
-                        </Link>
+                        </a>
                     </div>
                     <div className='flex flex-wrap gap-2 sm:gap-4 justify-center lg:justify-between'>
                         {isLoading ? (
@@ -103,7 +104,7 @@ const MainSectionKaprodi = () => {
                                             <img src={item.Mahasiswa.profile_pict ? item.Mahasiswa.profile_pict : people} alt="" className='w-22' />
                                         </div>
                                         <div className='text-center'>
-                                            <h1 className='text-lg font-semibold'>{item.name}</h1>
+                                            <h1 className='text-lg font-semibold'>{item.nama}</h1>
                                             <h2 className='text-md -mt-1'>{item.Mahasiswa.prodi}</h2>
                                         </div>
                                     </div>

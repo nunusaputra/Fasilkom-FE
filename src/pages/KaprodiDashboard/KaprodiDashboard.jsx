@@ -7,6 +7,9 @@ import Banner from '../../element/Dashboard-Elements/Banner'
 import MainSectionKaprodi from '../../element/Dashboard-Elements/MainSectionKaprodi'
 import Statistik from '../../element/Dashboard-Elements/Statistik'
 import ProfileSection from '../../element/Dashboard-Elements/ProfileSection'
+import { getUser, Logout } from '../../redux/Action/LoginAction'
+import { toast } from 'react-toastify'
+import { reset } from '../../redux/Slice/authSlice'
 
 const KaprodiDashboard = () => {
     const navigate = useNavigate()

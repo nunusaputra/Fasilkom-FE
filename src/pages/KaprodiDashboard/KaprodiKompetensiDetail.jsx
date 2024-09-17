@@ -2,9 +2,11 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
 import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
+import blank from '../../assets/img/blank.png'
+import { foramterDate } from '../../utils/formaterDate'
 
 const color = {
     "waiting": "bg-yellow-500",
@@ -14,6 +16,7 @@ const color = {
 
 const KaprodiKompetensiDetail = () => {
     const { id } = useParams()
+    const navigate = useNavigate()
     const { user } = useSelector(state => state.auth)
     const [data, setData] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -113,7 +116,7 @@ const KaprodiKompetensiDetail = () => {
                                 }}
                             />
                             <div className='flex flex-col gap-2 self-center'>
-                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama}</h1>
+                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama} ({data.Mahasiswa.prodi})</h1>
                                 <p className='text-sm text-slate-500'>{data.Mahasiswa.email}</p>
                             </div>
                         </div>
@@ -161,7 +164,7 @@ const KaprodiKompetensiDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.tanggal_kompetisi}
+                                            {foramterDate(data.tanggal_kompetisi)}
                                         </span>
                                     </dd>
                                 </div>
@@ -170,7 +173,7 @@ const KaprodiKompetensiDetail = () => {
                                         Tingkat Kompetisi
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <span className="text-primaryColor hover:underline hover:decoration-solid">
+                                        <span className="text-primaryColor hover:underline hover:decoration-solid capitalize">
                                             {data.tingkat_kompetisi}
                                         </span>
                                     </dd>
