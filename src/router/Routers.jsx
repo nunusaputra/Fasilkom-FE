@@ -50,6 +50,23 @@ import KaprodiRegulerDetialLayouts from "../layouts/KaprodiDashboard/KaprodiRegu
 import KaprodiDospemDetailLayouts from "../layouts/KaprodiDashboard/KaprodiDospemDetailLayouts";
 import KaprodiLaporanDetailLayouts from "../layouts/KaprodiDashboard/KaprodiLaporanDetailLayouts";
 import KaprodiKompetensiDetailLayouts from "../layouts/KaprodiDashboard/KaprodiKompetensiDetailLayouts";
+import DospemDashboardLayouts from "../layouts/DospemDashboard/DospemDashboardLayouts";
+import DospemProfileLayouts from "../layouts/DospemDashboard/DospemProfileLayouts";
+import DospemBimbinganLayouts from "../layouts/DospemDashboard/DospemBimbinganLayouts";
+import DospemBimbinganDetailLayouts from "../layouts/DospemDashboard/DospemBimbinganDetailLayouts";
+import DospemLogbookLayouts from "../layouts/DospemDashboard/DospemLogbookLayouts";
+import DospemLaporanLayouts from "../layouts/DospemDashboard/DospemLaporanLayouts";
+import DospemLaporanDetailLayouts from "../layouts/DospemDashboard/DospemLaporanDetailLayouts";
+import DospemNilaiLayouts from "../layouts/DospemDashboard/DospemNilaiLayouts";
+import DospemNilaiDetailLayouts from "../layouts/DospemDashboard/DospemNilaiDetailLayouts";
+import DospemCreateNilaiLayouts from "../layouts/DospemDashboard/DospemCreateNilaiLayouts";
+import DospemUpdateNilaiLayouts from "../layouts/DospemDashboard/DospemUpdateNilaiLayouts";
+import MitraCompProfileLayouts from "../layouts/MitraDashboard/MitraCompProfileLayouts";
+import MitraCreateNilaiLayouts from "../layouts/MitraDashboard/MitraCreateNilaiLayouts";
+import MitraUpdateNilaiLayouts from "../layouts/MitraDashboard/MitraUpdateNilaiLayouts";
+import MitraNilaiDetailLayouts from "../layouts/MitraDashboard/MitraNilaiDetailLayouts";
+import MitraDashboardLayout from "../layouts/MitraDashboard/MitraDashboardLayout";
+import MitraNilaiLayouts from "../layouts/MitraDashboard/MitraNilaiLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -172,6 +189,27 @@ const Routers = () => {
         <Route path="/kaprodi-dashboard/laporan/:id" element={<PrivateRouteUser><KaprodiLaporanDetailLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/dosen-pembimbing" element={<PrivateRouteUser><KaprodiDospemLayouts /></PrivateRouteUser>} />
         <Route path="/kaprodi-dashboard/dosen-pembimbing/:id" element={<PrivateRouteUser><KaprodiDospemDetailLayouts /></PrivateRouteUser>} />
+
+        {/* Dashboard Dospem */}
+        <Route path="/dospem-dashboard" element={<PrivateRouteUser><DospemDashboardLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/profile/:id" element={<PrivateRouteUser><DospemProfileLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/bimbingan" element={<PrivateRouteUser><DospemBimbinganLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/bimbingan/:id" element={<PrivateRouteUser><DospemBimbinganDetailLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/logbook" element={<PrivateRouteUser><DospemLogbookLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/laporan" element={<PrivateRouteUser><DospemLaporanLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/laporan/:id" element={<PrivateRouteUser><DospemLaporanDetailLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/nilai" element={<PrivateRouteUser><DospemNilaiLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/nilai/:id" element={<PrivateRouteUser><DospemNilaiDetailLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/create-nilai" element={<PrivateRouteUser><DospemCreateNilaiLayouts /></PrivateRouteUser>} />
+        <Route path="/dospem-dashboard/update-nilai/:id" element={<PrivateRouteUser><DospemUpdateNilaiLayouts /></PrivateRouteUser>} />
+
+        {/* Dashboard Mitra */}
+        <Route path="/mitra-dashboard" element={<PrivateRouteUser><MitraDashboardLayout /></PrivateRouteUser>} />
+        <Route path="/mitra-dashboard/profile/:id" element={<PrivateRouteUser><MitraCompProfileLayouts /></PrivateRouteUser>} />
+        <Route path="/mitra-dashboard/nilai" element={<PrivateRouteUser><MitraNilaiLayouts /></PrivateRouteUser>} />
+        <Route path="/mitra-dashboard/create-nilai" element={<PrivateRouteUser><MitraCreateNilaiLayouts /></PrivateRouteUser>} />
+        <Route path="/mitra-dashboard/update-nilai/:id" element={<PrivateRouteUser><MitraUpdateNilaiLayouts /></PrivateRouteUser>} />
+        <Route path="/mitra-dashboard/nilai/:id" element={<PrivateRouteUser><MitraNilaiDetailLayouts /></PrivateRouteUser>} />
 
         {/* Company Dashboard */}
         <Route path="/company-dashboard" element={<PrivateRouteUser><MitraDashboardLayouts /></PrivateRouteUser>} />

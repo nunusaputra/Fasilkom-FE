@@ -15,6 +15,8 @@ import {
     UsersIcon,
 } from "@heroicons/react/24/outline"
 import { useSelector } from 'react-redux'
+import { LiaChalkboardTeacherSolid } from 'react-icons/lia'
+import { HiTable } from 'react-icons/hi'
 
 const textVariants = {
     hidden: { opacity: 0, width: 0 },
@@ -126,6 +128,45 @@ const DrawerMobile = () => {
                                     <ChartPieIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
                                 <DrawerLink name="Profile" isOpen={isOpen} path={`/kaprodi-dashboard/profile/${user && user.id}`}>
+                                    <UsersIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                            </>
+                        )}
+
+                        {/* Dospem Routes */}
+                        {user && user.role === "dospem" && (
+                            <>
+                                <DrawerLink name="Dashboard" isOpen={isOpen} path={"/dospem-dashboard"}>
+                                    <ChartBarIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Bimbingan Magang" isOpen={isOpen} path={"/dospem-dashboard/bimbingan"}>
+                                    <LiaChalkboardTeacherSolid className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Logbook Magang" isOpen={isOpen} path={"/dospem-dashboard/logbook"}>
+                                    <BookmarkSquareIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/dospem-dashboard/laporan"}>
+                                    <ChartPieIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Nilai Magang" isOpen={isOpen} path={"/dospem-dashboard/nilai"}>
+                                    <HiTable className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/dospem-dashboard/profile/${user && user.id}`}>
+                                    <UsersIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                            </>
+                        )}
+
+                        {/* Mitra Routes */}
+                        {user && user.role === "mitra" && (
+                            <>
+                                <DrawerLink name="Dashboard" isOpen={isOpen} path={"/mitra-dashboard"}>
+                                    <ChartBarIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Nilai Magang" isOpen={isOpen} path={"/mitra-dashboard/nilai"}>
+                                    <HiTable className="text-white text-4xl" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/mitra-dashboard/profile/${user && user.id}`}>
                                     <UsersIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
                             </>

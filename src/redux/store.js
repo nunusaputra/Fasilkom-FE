@@ -11,6 +11,8 @@ import infoMhsSlice from "./Slice/infoMhsSlice";
 import logbookMhsSlice from "./Slice/logbookMhsSlice";
 import magangRegulerSlice from "./Slice/magangRegulerSlice";
 import dospemSlice from "./Slice/dospemSlice";
+import bimbinganSlice from "./Slice/bimbinganSlice";
+import nilaiSlice from "./Slice/nilaiSlice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +28,8 @@ const store = configureStore({
     logbookMhs: logbookMhsSlice,
     magang: magangRegulerSlice,
     dospem: dospemSlice,
+    bimbingan: bimbinganSlice,
+    nilai: nilaiSlice,
   },
   // devTools: false,
 });

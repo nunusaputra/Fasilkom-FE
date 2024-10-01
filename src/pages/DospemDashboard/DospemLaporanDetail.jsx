@@ -1,45 +1,61 @@
-import { PaperClipIcon } from '@heroicons/react/24/outline'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
+import { color } from '../../assets/data/color'
 import blank from '../../assets/img/blank.png'
+import { PaperClipIcon } from '@heroicons/react/24/outline'
+import Modal from '../../components/Modal'
+import { acceptLaporan, revisionLaporan } from '../../redux/Action/BimbinganAction'
+import { toast } from 'react-toastify'
+import { DialogTitle } from '@headlessui/react'
 
-const color = {
-    "waiting": "bg-yellow-500",
-    "accepted": "bg-green-500",
-    "rejected": "bg-third",
-}
-
-const KaprodiLaporanDetail = () => {
+const DospemLaporanDetail = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { id } = useParams()
     const { user } = useSelector(state => state.auth)
-    const [data, setData] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const { isLoading, laporan, isSuccess, isError, message } = useSelector(state => state.bimbingan)
+    const [open, setOpen] = useState(false)
+    const [comment, setComment] = useState(null)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_KAPRODI}/laporan/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`
-                    }
-                })
-                setData(response.data.data)
-            } catch (error) {
-                if (error.response) {
-                    const message = error.response.data.message
-                    return toast.error(message)
-                }
-            } finally {
-                setIsLoading(false)
-            }
+    const handleOpen = () => setOpen(!open)
+    const handleClose = () => setOpen(false)
+
+    const handleAccept = () => {
+        const data = {
+            id,
+            token: user.token
         }
 
-        fetchData()
-    }, [id, user.token])
+        dispatch(acceptLaporan(data))
+        if (isSuccess) {
+            toast.success("Success accepted report")
+            navigate('/dospem-dashboard/laporan')
+        } else if (isError) {
+            toast.error(message)
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const data = {
+            id,
+            token: user.token,
+            comment
+        }
+
+        dispatch(revisionLaporan(data))
+        if (isSuccess) {
+            toast.success("Success revision report")
+            navigate('/dospem-dashboard/laporan')
+        } else if (isError) {
+            toast.error(message)
+        }
+    }
+
 
     return (
         <div className='px-4'>
@@ -51,7 +67,7 @@ const KaprodiLaporanDetail = () => {
                 <div className='bg-slate-50 rounded-lg drop-shadow-lg p-4'>
                     <div className=''>
                         {/* Back Section */}
-                        <Link to={'/kaprodi-dashboard/laporan'}>
+                        <Link to={'/dospem-dashboard/laporan'}>
                             <div className='flex gap-2 mb-5 group underline-hover cursor-pointer relative sm:hover:font-bold w-[60%] lg:w-[18%]'>
                                 <IoIosArrowRoundBack className='text-3xl group-hover:-rotate-45 transition ease-in duration-200' />
                                 <h1 className='text-sm self-center'>Back to previous page</h1>
@@ -62,24 +78,24 @@ const KaprodiLaporanDetail = () => {
                                 <h1 className='text-lg font-bold'>Detail Laporan Magang Mahasiswa</h1>
                                 <p className='text-sm text-slate-500'>You can see about internship report detail here.</p>
                             </div>
-                            <div className={`sm:self-center px-4 py-2 ${color[data.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
-                                {data.status}
+                            <div className={`sm:self-center px-4 py-2 ${color[laporan.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
+                                {laporan.status}
                             </div>
                         </div>
                     </div>
 
-                    {/* Magang Reguler Detail */}
+                    {/* Laporan Detail */}
                     <div className='flex flex-col gap-4 mt-10'>
                         <div className='flex gap-2 lg:gap-4'>
                             <div className='w-32 h-32 rounded-lg bg-cover bg-top'
                                 style={{
-                                    backgroundImage: `url(${data.Mahasiswa.profile_pict === null ?
-                                        blank : data.Mahasiswa.profile_pict})`
+                                    backgroundImage: `url(${laporan.Mahasiswa.profile_pict === null ?
+                                        blank : laporan.Mahasiswa.profile_pict})`
                                 }}
                             />
                             <div className='flex flex-col gap-2 self-center'>
-                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama} ({data.Mahasiswa.prodi})</h1>
-                                <p className='text-sm text-slate-500'>{data.Mahasiswa.email}</p>
+                                <h1 className='text-lg font-semibold lg:text-xl'>{laporan.nama} ({laporan.Mahasiswa.prodi})</h1>
+                                <p className='text-sm text-slate-500'>{laporan.Mahasiswa.email}</p>
                             </div>
                         </div>
                         <div className="mt-6 ">
@@ -89,7 +105,7 @@ const KaprodiLaporanDetail = () => {
                                         Full Name
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {data.nama}
+                                        {laporan.nama}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -97,7 +113,7 @@ const KaprodiLaporanDetail = () => {
                                         NPM
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {data.npm}
+                                        {laporan.npm}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -106,7 +122,7 @@ const KaprodiLaporanDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.User.name}
+                                            {laporan.User.name}
                                         </span>
                                     </dd>
                                 </div>
@@ -115,7 +131,7 @@ const KaprodiLaporanDetail = () => {
                                         Komentar Dosen Pembimbing
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
-                                        {data.comment === null ? 'Tidak ada komentar dari dosen pembimbing' : data.comment}
+                                        {laporan.comment === null ? 'Tidak ada komentar dari dosen pembimbing' : laporan.comment}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -124,7 +140,7 @@ const KaprodiLaporanDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.tempat_magang}
+                                            {laporan.tempat_magang}
                                         </span>
                                     </dd>
                                 </div>
@@ -134,7 +150,7 @@ const KaprodiLaporanDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.alamat_magang}
+                                            {laporan.alamat_magang}
                                         </span>
                                     </dd>
                                 </div>
@@ -144,7 +160,7 @@ const KaprodiLaporanDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.longitude_magang}
+                                            {laporan.longitude_magang}
                                         </span>
                                     </dd>
                                 </div>
@@ -154,7 +170,7 @@ const KaprodiLaporanDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.latitude_magang}
+                                            {laporan.latitude_magang}
                                         </span>
                                     </dd>
                                 </div>
@@ -163,9 +179,9 @@ const KaprodiLaporanDetail = () => {
                                         Dokumentasi Magang
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <a href={`${data.dokumentasi}`} target="_blank" rel="noopener noreferrer">
+                                        <a href={`${laporan.dokumentasi}`} target="_blank" rel="noopener noreferrer">
                                             <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                                {data.dokumentasi}
+                                                {laporan.dokumentasi}
                                             </span>
                                         </a>
                                     </dd>
@@ -187,13 +203,13 @@ const KaprodiLaporanDetail = () => {
                                                     />
                                                     <div className="ml-4 flex min-w-0 flex-1 gap-2">
                                                         <span className="truncate font-medium">
-                                                            Lembar_Pengesahan_{data.Mahasiswa.name}.pdf
+                                                            Lembar_Pengesahan_{laporan.Mahasiswa.name}.pdf
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div className="ml-4 flex-shrink-0">
                                                     <a
-                                                        href={`${data.lembar_pengesahan}`}
+                                                        href={`${laporan.lembar_pengesahan}`}
                                                         className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
                                                         target="_blank"
                                                     >
@@ -221,13 +237,13 @@ const KaprodiLaporanDetail = () => {
                                                     />
                                                     <div className="ml-4 flex min-w-0 flex-1 gap-2">
                                                         <span className="truncate font-medium">
-                                                            Laporan_Magang_{data.Mahasiswa.name}.pdf
+                                                            Laporan_Magang_{laporan.Mahasiswa.name}.pdf
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div className="ml-4 flex-shrink-0">
                                                     <a
-                                                        href={`${data.laporan_magang}`}
+                                                        href={`${laporan.laporan_magang}`}
                                                         className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
                                                         target="_blank"
                                                     >
@@ -241,10 +257,76 @@ const KaprodiLaporanDetail = () => {
                             </dl>
                         </div>
                     </div>
+
+                    {/* Button Action */}
+                    <div className='mt-5'>
+                        <div className='flex flex-col-reverse gap-2 sm:justify-start sm:flex-row-reverse'>
+                            <button className='px-4 py-2 bg-secondary text-white font-semibold rounded-lg'
+                                onClick={handleOpen}>
+                                Revision
+                            </button>
+                            <button className='px-4 py-2 border border-secondary text-secondary font-semibold rounded-lg hover:bg-secondary hover:text-white'
+                                onClick={handleAccept}>
+                                Accept
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
+
+            {/* Modal Section */}
+            <Modal open={open} handleClose={handleClose}>
+                <form onSubmit={handleSubmit}>
+                    <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div className="sm:flex sm:items-start">
+                            <div className="">
+                                <DialogTitle as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                                    Tuliskan revisi yang akan diberikan
+                                </DialogTitle>
+                                <div className="mt-1">
+                                    <p className="text-xs text-gray-500">
+                                        Kamu dapat menuliskan catatan revisi pada laporan magang disini.
+                                    </p>
+                                </div>
+                                <div className='mt-4'>
+                                    <label htmlFor="sop" className='text-md font-semibold text-gray-900'>Revisi Laporan</label>
+                                    <textarea
+                                        name="sop"
+                                        id="sop"
+                                        rows={5}
+                                        cols={50}
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                        placeholder='It is a long established fact that a reader will...'
+                                        className='mt-2 text-sm ring-2 ring-secondary focus:outline-none rounded-lg w-full py-2.5 px-4 text-black-800 placeholder:opacity-50' />
+                                    <p className='text-xs text-gray-500'>Write a few sentences about the revision</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 sm:gap-2">
+                        {isLoading ? (
+                            <div className='relative group'>
+                                <button disabled className='mt-3 inline-flex w-full justify-center rounded-md bg-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm sm:mt-0 sm:w-auto'>
+                                    {isLoading ? <HashLoader size={25} color='#fff' /> : "Submit"}
+                                </button>
+                                <span className="invisible group-hover:visible absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-2 bg-gray-700 text-white text-xs rounded-md">
+                                    Loading Process
+                                </span>
+                            </div>
+                        ) : (
+                            <button className='mt-3 inline-flex w-full justify-center rounded-md bg-secondary px-3 py-2 text-sm font-semibold text-white shadow-sm sm:mt-0 sm:w-auto'>Submit</button>
+                        )}
+                        <button
+                            type="button"
+                            onClick={handleClose}
+                            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        >Cancel</button>
+                    </div>
+                </form>
+            </Modal>
         </div>
     )
 }
 
-export default KaprodiLaporanDetail
+export default DospemLaporanDetail

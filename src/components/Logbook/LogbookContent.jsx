@@ -30,13 +30,6 @@ const LogbookContent = ({ id, handleClose }) => {
         })
     }
 
-    // const handleDate = (e) => {
-    //     setInput((prevInput) => ({
-    //         ...prevInput,
-    //         [e.target.name]: formaterTime(e.target.value)
-    //     }))
-    // }
-
     const handleSubmit = (e) => {
         e.preventDefault()
 

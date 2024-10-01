@@ -52,6 +52,12 @@ const FormLoginAdmin = () => {
             } else if (user.role === 'kaprodi') {
                 navigate("/kaprodi-dashboard")
                 toast.success("Login Success")
+            } else if (user.role === 'dospem') {
+                navigate("/dospem-dashboard")
+                toast.success("Login Success")
+            } else if (user.role === 'mitra') {
+                navigate("/mitra-dashboard")
+                toast.success("Login Success")
             } else {
                 navigate("/error-page")
                 toast.error("Something went wrong")
