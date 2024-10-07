@@ -67,6 +67,24 @@ import MitraUpdateNilaiLayouts from "../layouts/MitraDashboard/MitraUpdateNilaiL
 import MitraNilaiDetailLayouts from "../layouts/MitraDashboard/MitraNilaiDetailLayouts";
 import MitraDashboardLayout from "../layouts/MitraDashboard/MitraDashboardLayout";
 import MitraNilaiLayouts from "../layouts/MitraDashboard/MitraNilaiLayouts";
+import PengajuanLayouts from "../layouts/DashboardMhs/PengajuanLayouts";
+import DetailRegulerLayouts from "../layouts/DashboardMhs/DetailRegulerLayouts";
+import DetailKompetensiLayouts from "../layouts/DashboardMhs/DetailKompetensiLayouts";
+import MagangRegulerLayouts from "../layouts/DashboardMhs/MagangRegulerLayouts";
+import MagangKompetensiLayouts from "../layouts/DashboardMhs/MagangKompetensiLayouts";
+import UpdateRegulerLayouts from "../layouts/DashboardMhs/UpdateRegulerLayouts";
+import UpdateKompetensiLayouts from "../layouts/DashboardMhs/UpdateKompetensiLayouts";
+import CreateRegulerLayouts from "../layouts/DashboardMhs/CreateRegulerLayouts";
+import CreateKompetensiLayouts from "../layouts/DashboardMhs/CreateKompetensiLayouts";
+import NilaiMhsLayouts from "../layouts/DashboardMhs/NilaiMhsLayouts";
+import DetailNilaiMhsLayouts from "../layouts/DashboardMhs/DetailNilaiMhsLayouts";
+import DetailLaporanLayouts from "../layouts/DashboardMhs/DetailLaporanLayouts";
+import LaporanLayouts from "../layouts/DashboardMhs/LaporanLayouts";
+import UpdateLaporanLayouts from "../layouts/DashboardMhs/UpdateLaporanLayouts";
+import DospemListLayouts from "../layouts/DashboardMhs/DospemListLayouts";
+import DetailDospemLayouts from "../layouts/DashboardMhs/DetailDospemLayouts";
+import UpdateDospemLayouts from "../layouts/DashboardMhs/UpdateDospemLayouts";
+import BimbinganLayouts from "../layouts/DashboardMhs/BimbinganLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -164,8 +182,26 @@ const Routers = () => {
         <Route path="/dashboard/profile" element={<PrivateRoute><ProfileLayouts /></PrivateRoute>} />
         <Route path="/dashboard/change-password" element={<PrivateRoute><ChangePassLayouts /></PrivateRoute>} />
         <Route path="/dashboard/logbook" element={<PrivateRoute><LogbookLayouts /></PrivateRoute>} />
-        <Route path="/dashboard/laporan-magang" element={<PrivateRoute><LaporanMagangLayouts /></PrivateRoute>} />
-        <Route path="/dashboard/dosen-pembimbing" element={<PrivateRoute><DospemLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/create-laporan" element={<PrivateRoute><LaporanMagangLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/laporan-magang/:id" element={<PrivateRoute><DetailLaporanLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/laporan-magang" element={<PrivateRoute><LaporanLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/update-laporan/:id" element={<PrivateRoute><UpdateLaporanLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/create-dospem" element={<PrivateRoute><DospemLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/dosen-pembimbing" element={<PrivateRoute><DospemListLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/dosen-pembimbing/:id" element={<PrivateRoute><DetailDospemLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/update-dospem/:id" element={<PrivateRoute><UpdateDospemLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/pengajuan-magang" element={<PrivateRoute><PengajuanLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/magang-reguler" element={<PrivateRoute><MagangRegulerLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/magang-kompetensi" element={<PrivateRoute><MagangKompetensiLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/magang-reguler/:id" element={<PrivateRoute><DetailRegulerLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/magang-kompetensi/:id" element={<PrivateRoute><DetailKompetensiLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/update-reguler/:id" element={<PrivateRoute><UpdateRegulerLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/update-kompetensi/:id" element={<PrivateRoute><UpdateKompetensiLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/create-reguler" element={<PrivateRoute><CreateRegulerLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/create-kompetensi" element={<PrivateRoute><CreateKompetensiLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/nilai" element={<PrivateRoute><NilaiMhsLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/nilai/:id" element={<PrivateRoute><DetailNilaiMhsLayouts /></PrivateRoute>} />
+        <Route path="/dashboard/bimbingan" element={<PrivateRoute><BimbinganLayouts /></PrivateRoute>} />
 
         {/* Dashboard Admin */}
         <Route path="/admin-dashboard" element={<PrivateRouteUser><AdminDashboardLayouts /></PrivateRouteUser>} />

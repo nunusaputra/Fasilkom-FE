@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getDospem,
   getDospemById,
+  getDospemMhs,
   getListDosen,
   updateDospem,
 } from "../Action/DospemAction";
@@ -9,6 +10,7 @@ import {
 const initialState = {
   dospem: [],
   dosenList: [],
+  dospemMhs: [],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -77,6 +79,21 @@ const dospemSlice = createSlice({
       state.dosenList = action.payload;
     });
     builder.addCase(getListDosen.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.message = action.payload;
+    });
+
+    // * Get Dospem Mahasiswa Builder
+    builder.addCase(getDospemMhs.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDospemMhs.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.dospemMhs = action.payload;
+    });
+    builder.addCase(getDospemMhs.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;

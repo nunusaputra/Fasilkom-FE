@@ -13,6 +13,7 @@ import magangRegulerSlice from "./Slice/magangRegulerSlice";
 import dospemSlice from "./Slice/dospemSlice";
 import bimbinganSlice from "./Slice/bimbinganSlice";
 import nilaiSlice from "./Slice/nilaiSlice";
+import pengajuanSlice from "./Slice/pengajuanSlice";
 
 const store = configureStore({
   reducer: {
@@ -30,8 +31,8 @@ const store = configureStore({
     dospem: dospemSlice,
     bimbingan: bimbinganSlice,
     nilai: nilaiSlice,
+    pengajuan: pengajuanSlice,
   },
-  // devTools: false,
 });
 
 export default store;

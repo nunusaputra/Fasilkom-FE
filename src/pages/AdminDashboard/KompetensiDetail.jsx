@@ -6,6 +6,8 @@ import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import blank from '../../assets/img/blank.png'
 import { HashLoader } from 'react-spinners'
+import { RiPencilFill } from 'react-icons/ri'
+import { FaTrashAlt } from 'react-icons/fa'
 
 const color = {
     "waiting": "bg-yellow-500",
@@ -62,8 +64,21 @@ const KompetensiDetail = () => {
                                 <h1 className='text-lg font-bold'>Pengajuan Magang Kompetensi Information</h1>
                                 <p className='text-sm text-slate-500'>You can see about submission detail here.</p>
                             </div>
-                            <div className={`sm:self-center px-4 py-2 ${color[data.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
-                                {data.status}
+                            <div className='flex flex-col gap-4'>
+                                <div className={`sm:self-center px-4 py-2 ${color[data.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
+                                    {data.status}
+                                </div>
+                                <div className='flex gap-2 sm:self-center'>
+                                    <Link to={`/dashboard/magang-kompetensi/${job.id}`}>
+                                        <div className='w-8 h-8 rounded-md border border-secondary text-secondary flex items-center cursor-pointer' >
+                                            <RiPencilFill className='text-sm mx-auto' />
+                                        </div>
+                                    </Link>
+                                    <div className='border-r-2 border-slate-400 h-8'></div>
+                                    <div className='w-8 h-8 rounded-md bg-secondary text-white flex items-center cursor-pointer' onClick={() => handleDelete(job.id)}>
+                                        <FaTrashAlt className='text-sm mx-auto' />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

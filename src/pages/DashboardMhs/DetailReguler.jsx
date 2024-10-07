@@ -1,52 +1,39 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { foramterDate } from '../../utils/formaterDate'
-import blank from '../../assets/img/blank.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
+import { color } from '../../assets/data/color'
+import blank from '../../assets/img/blank.png'
+import { foramterDate } from '../../utils/formaterDate'
+import { toast } from 'react-toastify'
+import { deleteRegulerMhs } from '../../redux/Action/PengajuanAction'
 import { RiPencilFill } from 'react-icons/ri'
 import { FaTrashAlt } from 'react-icons/fa'
 
-const color = {
-    "waiting": "bg-yellow-500",
-    "accepted": "bg-green-500",
-    "rejected": "bg-third",
-}
-
-const RegulerDetail = () => {
+const DetailReguler = () => {
     const { id } = useParams()
-    const { user } = useSelector(state => state.auth)
-    const [data, setData] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.loginMhs)
+    const { Loading, pengajuan } = useSelector(state => state.pengajuan)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL_ADMIN}/magang-reguler/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`
-                    }
-                })
-                setData(response.data.data)
-            } catch (error) {
-                if (error.response) {
-                    const message = error.response.data.message
-                    return toast.error(message)
-                }
-            } finally {
-                setIsLoading(false)
-            }
+    const handleDelete = (id) => {
+        const confirm = window.confirm("Are you sure want to delete this data?")
+        const data = {
+            id,
+            token: user.token
         }
-
-        fetchData()
-    }, [id, user.token])
+        if (confirm) {
+            dispatch(deleteRegulerMhs(data))
+            toast.success("Data berhasil dihapus")
+            navigate('/dashboard/magang-reguler')
+        }
+    }
 
     return (
-        <div className='px-4'>
-            {isLoading ? (
+        <div className='p-4 md:w-[60%] lg:w-[68%] lg:p-8'>
+            {Loading ? (
                 <div className='flex justify-center items-center min-h-screen'>
                     <HashLoader color='#CE231C' size={50} />
                 </div>
@@ -54,29 +41,29 @@ const RegulerDetail = () => {
                 <div className='bg-slate-50 rounded-lg drop-shadow-lg p-4'>
                     <div className=''>
                         {/* Back Section */}
-                        <Link to={'/admin-dashboard/magang-reguler'}>
-                            <div className='flex gap-2 mb-5 group underline-hover cursor-pointer relative sm:hover:font-bold w-[60%] lg:w-[18%]'>
+                        <Link to={'/dashboard/magang-reguler'}>
+                            <div className='flex gap-2 mb-5 group underline-hover cursor-pointer relative sm:hover:font-bold w-[60%] lg:w-[20%]'>
                                 <IoIosArrowRoundBack className='text-3xl group-hover:-rotate-45 transition ease-in duration-200' />
                                 <h1 className='text-sm self-center'>Back to previous page</h1>
                             </div>
                         </Link>
                         <div className='flex flex-col sm:flex-row gap-2 justify-between'>
                             <div className='flex flex-col gap-2'>
-                                <h1 className='text-lg font-bold'>Pengajuan Magang Reguler Information</h1>
+                                <h1 className='text-lg font-bold'>Detail Pengajuan Magang Reguler</h1>
                                 <p className='text-sm text-slate-500'>You can see about submission detail here.</p>
                             </div>
                             <div className='flex flex-col gap-4'>
-                                <div className={`sm:self-center px-4 py-2 ${color[data.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
-                                    {data.status}
+                                <div className={`sm:self-center px-4 py-2 ${color[pengajuan.status] || "border border-secondary text-secondary"} text-white rounded-lg text-center`}>
+                                    {pengajuan.status}
                                 </div>
-                                <div className='flex gap-2 sm:self-center'>
-                                    <Link to={`/dashboard/magang-reguler/${job.id}`}>
+                                <div className='flex gap-2 sm:self-center mt-2'>
+                                    <a href={`/dashboard/update-reguler/${pengajuan.id}`}>
                                         <div className='w-8 h-8 rounded-md border border-secondary text-secondary flex items-center cursor-pointer' >
                                             <RiPencilFill className='text-sm mx-auto' />
                                         </div>
-                                    </Link>
+                                    </a>
                                     <div className='border-r-2 border-slate-400 h-8'></div>
-                                    <div className='w-8 h-8 rounded-md bg-secondary text-white flex items-center cursor-pointer' onClick={() => handleDelete(job.id)}>
+                                    <div className='w-8 h-8 rounded-md bg-secondary text-white flex items-center cursor-pointer' onClick={() => handleDelete(pengajuan.id)}>
                                         <FaTrashAlt className='text-sm mx-auto' />
                                     </div>
                                 </div>
@@ -84,18 +71,18 @@ const RegulerDetail = () => {
                         </div>
                     </div>
 
-                    {/* Magang Reguler Detail */}
+                    {/* pengajuan Reguler Detail */}
                     <div className='flex flex-col gap-4 mt-10'>
                         <div className='flex gap-2 lg:gap-4'>
                             <div className='w-32 h-32 rounded-lg bg-cover bg-top'
                                 style={{
-                                    backgroundImage: `url(${data.Mahasiswa.profile_pict === null ?
-                                        blank : data.Mahasiswa.profile_pict})`
+                                    backgroundImage: `url(${pengajuan.Mahasiswa.profile_pict === null ?
+                                        blank : pengajuan.Mahasiswa.profile_pict})`
                                 }}
                             />
                             <div className='flex flex-col gap-2 self-center'>
-                                <h1 className='text-lg font-semibold lg:text-xl'>{data.nama}</h1>
-                                <p className='text-sm text-slate-500'>{data.Mahasiswa.email}</p>
+                                <h1 className='text-lg font-semibold lg:text-xl'>{pengajuan.nama} ({pengajuan.Mahasiswa.prodi})</h1>
+                                <p className='text-sm text-slate-500'>{pengajuan.Mahasiswa.email}</p>
                             </div>
                         </div>
                         <div className="mt-6 ">
@@ -105,7 +92,7 @@ const RegulerDetail = () => {
                                         Full Name
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {data.nama}
+                                        {pengajuan.nama}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -113,7 +100,7 @@ const RegulerDetail = () => {
                                         NPM
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {data.npm}
+                                        {pengajuan.npm}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -122,7 +109,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {foramterDate(data.ttl)}
+                                            {foramterDate(pengajuan.ttl)}
                                         </span>
                                     </dd>
                                 </div>
@@ -132,7 +119,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.agama}
+                                            {pengajuan.agama}
                                         </span>
                                     </dd>
                                 </div>
@@ -142,7 +129,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.alamat}
+                                            {pengajuan.alamat}
                                         </span>
                                     </dd>
                                 </div>
@@ -151,9 +138,9 @@ const RegulerDetail = () => {
                                         Nomer Telpon
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <a href={`https://wa.me/${data.no_telpon}`} target="_blank" rel="noopener noreferrer">
+                                        <a href={`https://wa.me/${pengajuan.no_telpon}`} target="_blank" rel="noopener noreferrer">
                                             <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                                {data.no_telpon === null ? "No Data" : data.no_telpon}
+                                                {pengajuan.no_telpon === null ? "No pengajuan" : pengajuan.no_telpon}
                                             </span>
                                         </a>
                                     </dd>
@@ -164,7 +151,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.nama_perusahaan}
+                                            {pengajuan.nama_perusahaan}
                                         </span>
                                     </dd>
                                 </div>
@@ -174,7 +161,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.penerima_surat}
+                                            {pengajuan.penerima_surat}
                                         </span>
                                     </dd>
                                 </div>
@@ -184,7 +171,7 @@ const RegulerDetail = () => {
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {data.alamat_perusahaan}
+                                            {pengajuan.alamat_perusahaan}
                                         </span>
                                     </dd>
                                 </div>
@@ -193,9 +180,9 @@ const RegulerDetail = () => {
                                         Nomer Telpon Perusahaan
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <a href={`https://wa.me/${data.no_telpon_perusahaan}`} target="_blank" rel="noopener noreferrer">
+                                        <a href={`https://wa.me/${pengajuan.no_telpon_perusahaan}`} target="_blank" rel="noopener noreferrer">
                                             <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                                {data.no_telpon_perusahaan === null ? "No Data" : data.no_telpon_perusahaan}
+                                                {pengajuan.no_telpon_perusahaan === null ? "No pengajuan" : pengajuan.no_telpon_perusahaan}
                                             </span>
                                         </a>
                                     </dd>
@@ -205,7 +192,7 @@ const RegulerDetail = () => {
                                         Jenis Badan Usaha
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">
-                                        {data.jenis_perusahaan === null ? "No Data" : data.jenis_perusahaan}
+                                        {pengajuan.jenis_perusahaan === null ? "No pengajuan" : pengajuan.jenis_perusahaan}
                                     </dd>
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -213,7 +200,7 @@ const RegulerDetail = () => {
                                         Deskripsi Pekerjaan
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {data.desc === null ? "No Description" : data.desc}
+                                        {pengajuan.desc === null ? "No Description" : pengajuan.desc}
                                     </dd>
                                 </div>
                             </dl>
@@ -225,4 +212,4 @@ const RegulerDetail = () => {
     )
 }
 
-export default RegulerDetail
+export default DetailReguler

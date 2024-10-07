@@ -58,7 +58,7 @@ const Profile = () => {
                     <h1 className='text-sm font-bold text-slate-600 mb-2 star-point '>Foto Profile</h1>
                     <form onSubmit={handleSubmit}>
                         <div className='flex flex-col sm:flex-row gap-2 items-center'>
-                            <div className='w-24 h-24 rounded-full bg-cover bg-top mt-1 mr-3' style={{ backgroundImage: `url(${previewImage === null ? user.profile_pict : previewImage})` }}></div>
+                            <div className='w-24 h-24 rounded-full bg-cover bg-top mt-1 mr-3 border-2 border-black' style={{ backgroundImage: `url(${previewImage === null ? user.profile_pict : previewImage})` }}></div>
                             <label for="doc" className="w-full sm:w-[30%] md:w-[40%] lg:w-[30%] xl:w-[10%] flex items-center p-2 gap-3 rounded-lg border-2 border-secondary cursor-pointer text-secondary">
                                 <h4 className="text-base font-semibold self-center mx-auto">Upload</h4>
                                 <input type="file" id="doc" name="doc" accept="image/png, image/jpg, image/jpeg" hidden onChange={handleImage} />

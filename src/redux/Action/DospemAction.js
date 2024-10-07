@@ -22,6 +22,29 @@ export const getDospem = createAsyncThunk(
   }
 );
 
+export const getDospemMhs = createAsyncThunk(
+  "mhs/dospem",
+  async (token, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL_MHS}/dosen-pembimbing`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data.data;
+    } catch (error) {
+      if (error.response) {
+        const message = error.response.data.message;
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+  }
+);
+
 export const getDospemById = createAsyncThunk(
   "kaprodi/dospemId",
   async (data, thunkAPI) => {

@@ -49,8 +49,6 @@ const KaprodiDospemDetail = () => {
         dispatch(getListDosen(user.token))
     }, [dispatch])
 
-    console.log(dosenList)
-
     return (
         <div className='px-4'>
             {isLoading ? (

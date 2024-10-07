@@ -6,10 +6,12 @@ import DataNotFound from '../components/DataNotFound'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { HashLoader } from 'react-spinners'
+import { getApply } from '../redux/Action/ApplyJobAction'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getDospem, getDospemMhs } from '../redux/Action/DospemAction'
-import { useNavigate } from 'react-router-dom'
 
-const FormLaporan = () => {
+const FormLaporanUpdate = () => {
+    const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { user } = useSelector(state => state.loginMhs)
@@ -40,7 +42,7 @@ const FormLaporan = () => {
         e.preventDefault()
         setIsLoading(true)
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL_MHS}/laporan`, input, {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL_MHS}/laporan/${id}`, input, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }
@@ -60,6 +62,29 @@ const FormLaporan = () => {
     useEffect(() => {
         dispatch(getDospemMhs(user.token))
     }, [dispatch])
+
+    useEffect(() => {
+        setIsLoading(true)
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL_MHS}/laporan/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                })
+                setInput(response.data.data)
+            } catch (error) {
+                if (error.response) {
+                    const message = error.response.data.message
+                    toast.error(message)
+                }
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchData()
+    }, [])
 
     return (
         <div>
@@ -204,4 +229,4 @@ const FormLaporan = () => {
     )
 }
 
-export default FormLaporan
+export default FormLaporanUpdate
