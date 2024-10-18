@@ -36,7 +36,7 @@ const QuickPath = [
         id: 4,
         title: "Pengajuan Magang",
         img: pengajuan,
-        path: "/dashboard/pengajuan",
+        path: "/dashboard/pengajuan-magang",
     },
 ]
 

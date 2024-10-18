@@ -105,11 +105,11 @@ const DetailKompetensi = () => {
                                 </div>
                                 <div className="px-4 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                     <dt className="text-sm leading-6 text-gray-900 font-bold">
-                                        kompetensi Anggota
+                                        Anggota Kelompok
                                     </dt>
                                     <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                         <span className="text-primaryColor hover:underline hover:decoration-solid">
-                                            {kompetensi.anggota}
+                                            {kompetensi.anggota === "" ? "Tidak ada anggota kelompok" : kompetensi.anggota}
                                         </span>
                                     </dd>
                                 </div>

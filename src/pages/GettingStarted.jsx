@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import logo from '../assets/img/logo.png'
 import { Link } from 'react-router-dom'
 import { AcademicCapIcon, BriefcaseIcon } from '@heroicons/react/24/outline'
+import Navbar from '../components/Navbar'
 
 const GettingStarted = () => {
     const [btn, setBtn] = useState(null)
     return (
         <div>
-            <nav className='bg-white px-6 lg:px-24 py-3 sticky top-0'>
-                <Link to={"/"}>
-                    <div className='text-2xl font-extrabold'>Fasilkom.</div>
-                </Link>
-            </nav>
+            <Navbar show={'navbar'} />
             <section className='flex flex-col gap-2 justify-center items-center px-6 xl:px-0 text-center'>
                 <h1 className='text-4xl font-semibold tracking-wide mb-10'>Join as a company or student</h1>
                 <div className='flex flex-col md:flex-row gap-4 lg:gap-8 mb-5'>

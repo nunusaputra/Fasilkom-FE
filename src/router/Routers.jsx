@@ -85,6 +85,10 @@ import DospemListLayouts from "../layouts/DashboardMhs/DospemListLayouts";
 import DetailDospemLayouts from "../layouts/DashboardMhs/DetailDospemLayouts";
 import UpdateDospemLayouts from "../layouts/DashboardMhs/UpdateDospemLayouts";
 import BimbinganLayouts from "../layouts/DashboardMhs/BimbinganLayouts";
+import ForgotPasswordLayouts from "../layouts/DashboardMhs/ForgotPasswordLayouts";
+import ForgetPasswordLayouts from "../layouts/AdminDashboard/ForgetPasswordLayouts";
+import ResetPasswordLayouts from "../layouts/AdminDashboard/ResetPasswordLayouts";
+import ResetPasswordMhsLayouts from "../layouts/DashboardMhs/ResetPasswordMhsLayouts";
 
 
 const PrivateRoute = ({ children }) => {
@@ -165,6 +169,10 @@ const Routers = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login-admin" element={<AdminLogin />} />
         <Route path="/started" element={<GettingStarted />} />
+        <Route path="/forgot-password" element={<ForgotPasswordLayouts />} />
+        <Route path="/forget-password" element={<ForgetPasswordLayouts />} />
+        <Route path="/auth/reset-password/:token" element={<ResetPasswordLayouts />} />
+        <Route path="/mahasiswa/reset-password/:token" element={<ResetPasswordMhsLayouts />} />
 
 
         {/* Job */}

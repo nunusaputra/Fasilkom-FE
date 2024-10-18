@@ -15,7 +15,7 @@ import ModalContent from '../../components/CreateAccount/ModalContent'
 import Pagination from '../../components/Pagination'
 import DataNotFound from '../../components/DataNotFound'
 import InputPassword from '../../element/InputForm/InputPassword'
-import { getUser } from '../../redux/Action/LoginAction'
+import blank from '../../assets/img/blank.png'
 
 const CreateAccount = () => {
   const dispatch = useDispatch()
@@ -57,13 +57,6 @@ const CreateAccount = () => {
       ...input,
       [e.target.name]: e.target.value
     })
-  }
-
-  const handleSelect = (e) => {
-    setInput((prevInput) => ({
-      ...prevInput,
-      role: e.target.value === "admin" ? "admin" : "mitra"
-    }))
   }
 
   const handleSubmit = (e) => {
@@ -155,7 +148,7 @@ const CreateAccount = () => {
                             <div className="avatar">
                               <div className="mask mask-squircle h-12 w-12 overflow-hidden">
                                 <img
-                                  src={item.profile === null ? "https://via.placeholder.com/150" : item.profile}
+                                  src={item.profile === null ? blank : item.profile}
                                   alt={item.name} />
                               </div>
                             </div>
@@ -275,10 +268,13 @@ const CreateAccount = () => {
                       id="role"
                       className='text-sm border border-primary rounded w-full py-2 px-3 text-slate-700 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent'
                       value={input.role}
-                      onChange={handleSelect}
+                      onChange={handleInput}
                     >
                       <option value="">Chosee Role</option>
                       <option value="admin">Admin</option>
+                      <option value="kaprodi">Kaprodi</option>
+                      <option value="dospem">Dosen Pembimbing</option>
+                      <option value="tim-magang">Tim Magang</option>
                       <option value="mitra">Mitra</option>
                     </select>
                   </div>
