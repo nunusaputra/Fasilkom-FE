@@ -12,7 +12,6 @@ const CreateAccountLayouts = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-
     requestAnimationFrame(() => {
       setTimeout(() => {
         setIsLoading(false)
@@ -25,6 +24,7 @@ const CreateAccountLayouts = () => {
       navigate('/forbidden')
     }
   }, [user])
+
   return (
     <div>
       {isLoading ? (

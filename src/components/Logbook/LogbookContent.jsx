@@ -17,6 +17,7 @@ const LogbookContent = ({ id, handleClose }) => {
     const item = logbookMhs.find(item => item.id === id)
     const formatDate = item.dateOfPosting.slice(0, 10)
     const [open, setOpen] = useState(false)
+    const [tab, setTab] = useState("desc")
     const [input, setInput] = useState({
         title: item.title,
         desc: item.desc,
@@ -29,13 +30,6 @@ const LogbookContent = ({ id, handleClose }) => {
             [e.target.name]: e.target.value
         })
     }
-
-    // const handleDate = (e) => {
-    //     setInput((prevInput) => ({
-    //         ...prevInput,
-    //         [e.target.name]: formaterTime(e.target.value)
-    //     }))
-    // }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -58,20 +52,24 @@ const LogbookContent = ({ id, handleClose }) => {
     const handleOpen = () => setOpen(!open)
 
     const handleDelete = (id) => {
+        const confirm = window.confirm("Are you sure want to delete this data?")
+
         const data = {
             id: id,
             token: user.token
         }
 
-        try {
-            dispatch(deleteLogbookMhs(data))
-            toast.success("Logbook has been deleted")
-            handleClose()
-            setTimeout(() => {
-                window.location.reload()
-            }, 1500)
-        } catch (error) {
-            toast.error("Something went wrong")
+        if (confirm) {
+            try {
+                dispatch(deleteLogbookMhs(data))
+                toast.success("Logbook has been deleted")
+                handleClose()
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1500)
+            } catch (error) {
+                toast.error("Something went wrong")
+            }
         }
     }
     return (
@@ -95,8 +93,28 @@ const LogbookContent = ({ id, handleClose }) => {
                                 <FaTrashAlt className='text-sm mx-auto' />
                             </div>
                         </div>
-                        <div className='mt-4'>
-                            <p className='text-sm'>{item.desc}</p>
+                        <div className='mt-5 md:col-start-1 md:row-start-1 lg:col-span-2 md:mt-3'>
+                            <div className='border-b border-solid border-[#0066ff34]'>
+                                <button
+                                    onClick={() => setTab("desc")}
+                                    className={`${tab === "desc" && "border-b border-solid border-secondary text-secondary"} 
+                                                                mr-5 text-[13px] leading-7 text-slate-600 font-semibold`}
+                                >
+                                    Logbook
+                                </button>
+                                <button
+                                    onClick={() => setTab("info")}
+                                    className={`${tab === "info" && "border-b border-solid border-secondary text-secondary"} 
+                                                                text-[13px] leading-7 text-slate-600 font-semibold`}
+                                >
+                                    Komentar Dosen
+                                </button>
+                            </div>
+                            <div className='mt-3 text-sm'>
+                                {tab === "desc" ?
+                                    <div className='text-justify'>{item.desc}</div>
+                                    : item.comment === null ? "No Comment" : item.comment}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import InputForm from '../element/InputForm/InputForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { loginMhs } from '../redux/Action/LoginMhsAction'
 import { toast } from 'react-toastify'
 import { HashLoader } from 'react-spinners'
@@ -70,6 +70,9 @@ const FormLogin = () => {
                 value={input.password}
                 onChange={handleInput}
             />
+            <Link to={"/forgot-password"}>
+                <div className='flex justify-end -mt-5 mb-6 text-sm text-blue-500 hover:font-semibold cursor-pointer'>Forgot Password?</div>
+            </Link>
             {isLoading ? (
                 <div className='relative group'>
                     <button disabled className='bg-secondary text-white w-full px-4 py-1 h-10 rounded-md font-semibold group-hover:cursor-not-allowed'>

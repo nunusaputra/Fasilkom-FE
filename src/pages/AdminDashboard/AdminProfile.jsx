@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FormProfileAdmin from '../../Fragments/FormProfileAdmin';
-import pattern from "../../assets/img/pattern-2.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../../redux/Action/LoginAction';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { HashLoader } from 'react-spinners';
@@ -10,7 +8,6 @@ import blank from '../../assets/img/blank.png';
 
 
 const AdminProfile = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +57,7 @@ const AdminProfile = () => {
       <div className='bg-slate-50 drop-shadow-xl rounded-lg min-h-screen overflow-hidden'>
         <div className='h-40 xl:h-60 bg-gradient-to-r from-violet-200 to-slate-200 drop-shadow-xl flex items-center relative bg-cover bg-center' >
           <svg xmlns="http://www.w3.org/2000/svg" className='absolute bottom-0 -z-10 opacity-10' viewBox="0 0 1440 320"><path fill="#929292" fill-opacity="1" d="M0,256L60,245.3C120,235,240,213,360,213.3C480,213,600,235,720,250.7C840,267,960,277,1080,245.3C1200,213,1320,139,1380,101.3L1440,64L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
-          <h1 className='text-center mx-auto font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-5xl text-slate-600 -mt-20 xl:-mt-10 opacity-60'>🩶 Halo, {user && user.name} 🩶</h1>
+          <h1 className='text-center mx-auto font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-5xl text-slate-600 -mt-20 xl:-mt-10 opacity-60'> Halo, {user && user.name} </h1>
           <div className='w-52 h-52 rounded-full bg-slate-50 absolute top-[100%] left-1/2 -translate-x-1/2 -translate-y-1/2'>
             <div className='w-44 h-44 rounded-full bg-slate-100 translate-y-4 flex items-center mx-auto overflow-hidden'>
               <img src={user && user.profile === null ? blank : user && user.profile} alt="" className='w-34 h-34' />

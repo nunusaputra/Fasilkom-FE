@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const url = import.meta.env.VITE_API_URL_MITRA;
+const url = import.meta.env.VITE_API_URL_TIM;
 
 export const getJob = createAsyncThunk(
   "mitra/getJob",

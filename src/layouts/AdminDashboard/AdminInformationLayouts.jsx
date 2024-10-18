@@ -14,13 +14,12 @@ const AdminInformationLayouts = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        dispatch(getUser())
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [dispatch, isLoading])
+    }, [isLoading])
 
     useEffect(() => {
         if (user && user.role !== "admin") {

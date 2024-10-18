@@ -9,8 +9,8 @@ const HeroSection = () => {
     return (
         <div className='grid grid-cols-1 gap-2 lg:grid-cols-5'>
             <div className='col-span-full lg:col-span-3 min-h-32 relative'>
-                <h1 className='text-3xl sm:text-5xl font-extrabold tracking-wide sm:leading-[3.5rem] text-center sm:text-left'>Grow your skill <span className='block'>and advance your </span>career with orbitern</h1>
-                <p className='py-2 sm:w-[80%] text-center sm:text-left'>Enhance your expertise and elevate your career with orbitern, where growth and opportunities align to fuel your success.</p>
+                <h1 className='text-3xl sm:text-5xl font-extrabold tracking-wide sm:leading-[3.5rem] text-center sm:text-left'>Grow your skill <span className='block'>and advance your </span>career with Fasilkom</h1>
+                <p className='py-2 sm:w-[80%] text-center sm:text-left'>Enhance your expertise and elevate your career with Fasilkom, where growth and opportunities align to fuel your success.</p>
                 <div className='flex gap-3 justify-center sm:justify-start'>
                     <Link to={'/started'}>
                         <button className='px-4 xl:px-6 py-2 bg-black font-semibold text-white flex gap-2 rounded-lg'>

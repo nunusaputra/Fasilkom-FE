@@ -6,13 +6,15 @@ import DataNotFound from '../components/DataNotFound'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { HashLoader } from 'react-spinners'
-import { getApply } from '../redux/Action/ApplyJobAction'
+import { getDospem, getDospemMhs } from '../redux/Action/DospemAction'
+import { useNavigate } from 'react-router-dom'
 
 const FormLaporan = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { user } = useSelector(state => state.loginMhs)
-    const { applied } = useSelector(state => state.jobMhs)
-    const show = applied.filter(item => item.status === "accepted")
+    const { dospemMhs } = useSelector(state => state.dospem)
+    const show = dospemMhs.filter(item => item.status === "accepted")
     const [isLoading, setIsLoading] = useState(false)
     const [input, setInput] = useState({
         nama: "",
@@ -44,9 +46,7 @@ const FormLaporan = () => {
                 }
             })
             toast.success(response.data.message)
-            setTimeout(() => {
-                window.location.reload()
-            }, 1500);
+            navigate('/dashboard/laporan-magang')
         } catch (error) {
             if (error.response) {
                 const message = error.response.data.message
@@ -58,8 +58,9 @@ const FormLaporan = () => {
     }
 
     useEffect(() => {
-        dispatch(getApply(user.token))
+        dispatch(getDospemMhs(user.token))
     }, [dispatch])
+
     return (
         <div>
             {show.length > 0 ? (
@@ -73,7 +74,7 @@ const FormLaporan = () => {
                             style="star-point"
                             placeholder="Gong Yoo"
                             size="mb-3"
-                            value={input.name}
+                            value={input.nama}
                             onChange={handleInput}
                         />
                         <InputForm

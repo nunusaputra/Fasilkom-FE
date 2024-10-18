@@ -2,9 +2,6 @@ import React, { useEffect } from 'react'
 import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
 import ChangePassword from '../../pages/AdminDashboard/ChangePassword'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { getUser } from '../../redux/Action/LoginAction'
 
 const ChangePasswordLayouts = () => {
     return (

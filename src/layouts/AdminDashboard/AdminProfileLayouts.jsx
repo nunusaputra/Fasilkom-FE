@@ -8,17 +8,20 @@ import { getUser } from '../../redux/Action/LoginAction'
 import Loading from '../../components/Loading'
 
 const AdminProfileLayouts = () => {
-    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        dispatch(getUser())
+        if (user && user.role !== "admin") {
+            navigate('/forbidden')
+        }
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [dispatch])
+    }, [isLoading, user, navigate])
 
     return (
         <div>

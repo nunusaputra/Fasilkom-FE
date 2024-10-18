@@ -23,7 +23,7 @@ const FormProfileMitra = () => {
         const getUserById = async () => {
             try {
                 const response = await axios.get(
-                    `${import.meta.env.VITE_API_URL_MITRA}/profile/${id}`, {
+                    `${import.meta.env.VITE_API_URL_TIM}/profile/${id}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`
                     }
@@ -58,7 +58,7 @@ const FormProfileMitra = () => {
         e.preventDefault()
         setLoading(true)
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL_MITRA}/edit/${id}`, input, {
+            await axios.put(`${import.meta.env.VITE_API_URL_TIM}/edit/${id}`, input, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }

@@ -14,12 +14,19 @@ const SideElemen = () => {
                 <FaHouseUser className='text-xl mt-1' />
                 <h1 className='text-lg font-semibold'>Dashboard</h1>
             </NavLink>
-            <NavLink to={"/dashboard/profile"}
+            <NavLink to={"/dashboard/pengajuan-magang"}
                 className={({ isActive }) => `flex gap-2 w-full p-4 drop-shadow-md md:w-[80%] md:rounded-lg 
                 ${isActive ? 'bg-white' : 'bg-transparent'} hover:bg-white cursor-pointer`}
             >
                 <FaUser className='text-xl mt-1' />
-                <h1 className='text-lg font-semibold'>Profile</h1>
+                <h1 className='text-lg font-semibold'>Pengajuan Magang</h1>
+            </NavLink>
+            <NavLink to={"/dashboard/bimbingan"}
+                className={({ isActive }) => `flex gap-2 w-full p-4 drop-shadow-md md:w-[80%] md:rounded-lg 
+                ${isActive ? 'bg-white' : 'bg-transparent'} hover:bg-white cursor-pointer`}
+            >
+                <TbNotes className='text-xl mt-1' />
+                <h1 className='text-lg font-semibold'>Bimbingan Magang</h1>
             </NavLink>
             <NavLink to={"/dashboard/logbook"}
                 className={({ isActive }) => `flex gap-2 w-full p-4 drop-shadow-md md:w-[80%] md:rounded-lg 
@@ -27,13 +34,6 @@ const SideElemen = () => {
             >
                 <IoIosBookmarks className='text-xl mt-1' />
                 <h1 className='text-lg font-semibold'>Logbook Magang</h1>
-            </NavLink>
-            <NavLink to={"/dashboard/laporan-magang"}
-                className={({ isActive }) => `flex gap-2 w-full p-4 drop-shadow-md md:w-[80%] md:rounded-lg 
-                ${isActive ? 'bg-white' : 'bg-transparent'} hover:bg-white cursor-pointer`}
-            >
-                <TbNotes className='text-xl mt-1' />
-                <h1 className='text-lg font-semibold'>Laporan Magang</h1>
             </NavLink>
             <NavLink to={"/dashboard/dosen-pembimbing"}
                 className={({ isActive }) => `flex gap-2 w-full p-4 drop-shadow-md md:w-[80%] md:rounded-lg 

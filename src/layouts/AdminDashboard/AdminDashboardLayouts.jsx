@@ -3,17 +3,24 @@ import DrawerMobile from '../../components/Drawer/DrawerMobile'
 import Drawer from '../../components/Drawer/Drawer'
 import Loading from '../../components/Loading'
 import AdminDashboard from '../../pages/AdminDashboard/AdminDashboard'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const AdminDashboardLayouts = () => {
+    const navigate = useNavigate()
+    const { user } = useSelector(state => state.auth)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        if (user && user.role !== "admin") {
+            navigate('/forbidden')
+        }
         requestAnimationFrame(() => {
             setTimeout(() => {
                 setIsLoading(false)
             }, 2000);
         })
-    }, [isLoading])
+    }, [isLoading, user, navigate])
 
     return (
         <div>

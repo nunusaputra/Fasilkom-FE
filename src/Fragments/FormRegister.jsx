@@ -19,6 +19,7 @@ const FormRegister = () => {
         confPassword: '',
         prodi: '',
         semester: '',
+        npm: '',
         tgl_lahir: ''
 
     })
@@ -47,6 +48,7 @@ const FormRegister = () => {
             confPassword: input.confPassword,
             prodi: input.prodi,
             semester: input.semester,
+            npm: input.npm,
             tgl_lahir: input.tgl_lahir
         }
 
@@ -128,6 +130,15 @@ const FormRegister = () => {
                         onChange={handleInput}
                     />
                 </div>
+                <InputForm
+                    label="NPM"
+                    type="text"
+                    name="npm"
+                    id="npm"
+                    value={input.npm}
+                    onChange={handleInput}
+                    placeholder="2010631170126"
+                />
                 <InputForm
                     label="Tanggal Lahir"
                     type="date"

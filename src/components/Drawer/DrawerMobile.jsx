@@ -15,6 +15,8 @@ import {
     UsersIcon,
 } from "@heroicons/react/24/outline"
 import { useSelector } from 'react-redux'
+import { LiaChalkboardTeacherSolid } from 'react-icons/lia'
+import { HiTable } from 'react-icons/hi'
 
 const textVariants = {
     hidden: { opacity: 0, width: 0 },
@@ -83,28 +85,95 @@ const DrawerMobile = () => {
                         exit={"hidden"}
                         transition={{ duration: 0.3 }}
                     >
-                        {user && user.role === "admin" ? (
+                        {/* Admin Routes */}
+                        {user && user.role === "admin" && (
                             <>
                                 <DrawerLink name="Dashboard" isOpen={isOpen} path={"/admin-dashboard"}>
                                     <ChartBarIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
-                                <DrawerLink name="Account" isOpen={isOpen} path={"/admin-dashboard/create-account"}>
-                                    <Square2StackIcon className="text-white min-w-8 w-8" />
-                                </DrawerLink>
-                                <DrawerLink name="Dosen Pembimbing" isOpen={isOpen} path={"/admin-dashboard/dosen-pembimbing"}>
-                                    <DocumentCheckIcon className="text-white min-w-8 w-8" />
-                                </DrawerLink>
-                                <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/admin-dashboard/laporan-magang"}>
-                                    <ChartPieIcon className="text-white min-w-8 w-8" />
-                                </DrawerLink>
                                 <DrawerLink name="Information" isOpen={isOpen} path={"/admin-dashboard/information"}>
                                     <SpeakerWaveIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
-                                <DrawerLink name="Users" isOpen={isOpen} path={`/admin-dashboard/profile/${user && user.id}`}>
+                                <DrawerLink name="Account" isOpen={isOpen} path={"/admin-dashboard/create-account"}>
+                                    <Square2StackIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Magang Reguler" isOpen={isOpen} path={"/admin-dashboard/magang-reguler"}>
+                                    <DocumentCheckIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Magang Kompetensi" isOpen={isOpen} path={"/admin-dashboard/magang-kompetensi"}>
+                                    <ChartPieIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/admin-dashboard/profile/${user && user.id}`}>
                                     <UsersIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
                             </>
-                        ) : (
+                        )}
+
+                        {/* Kaprodi Routes */}
+                        {user && user.role === "kaprodi" && (
+                            <>
+                                <DrawerLink name="Dashboard" isOpen={isOpen} path={"/kaprodi-dashboard"}>
+                                    <ChartBarIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Pengajuan Magang Reguler" isOpen={isOpen} path={"/kaprodi-dashboard/magang-reguler"}>
+                                    <SpeakerWaveIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Pengajuan Magang Kompetensi" isOpen={isOpen} path={"/kaprodi-dashboard/magang-kompetensi"}>
+                                    <Square2StackIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Pengajuan Dosen Pembimbing" isOpen={isOpen} path={"/kaprodi-dashboard/dosen-pembimbing"}>
+                                    <DocumentCheckIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/kaprodi-dashboard/laporan"}>
+                                    <ChartPieIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/kaprodi-dashboard/profile/${user && user.id}`}>
+                                    <UsersIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                            </>
+                        )}
+
+                        {/* Dospem Routes */}
+                        {user && user.role === "dospem" && (
+                            <>
+                                <DrawerLink name="Dashboard" isOpen={isOpen} path={"/dospem-dashboard"}>
+                                    <ChartBarIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Bimbingan Magang" isOpen={isOpen} path={"/dospem-dashboard/bimbingan"}>
+                                    <LiaChalkboardTeacherSolid className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Logbook Magang" isOpen={isOpen} path={"/dospem-dashboard/logbook"}>
+                                    <BookmarkSquareIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Laporan Magang" isOpen={isOpen} path={"/dospem-dashboard/laporan"}>
+                                    <ChartPieIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Nilai Magang" isOpen={isOpen} path={"/dospem-dashboard/nilai"}>
+                                    <HiTable className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/dospem-dashboard/profile/${user && user.id}`}>
+                                    <UsersIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                            </>
+                        )}
+
+                        {/* Mitra Routes */}
+                        {user && user.role === "mitra" && (
+                            <>
+                                <DrawerLink name="Dashboard" isOpen={isOpen} path={"/mitra-dashboard"}>
+                                    <ChartBarIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                                <DrawerLink name="Nilai Magang" isOpen={isOpen} path={"/mitra-dashboard/nilai"}>
+                                    <HiTable className="text-white text-4xl" />
+                                </DrawerLink>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/mitra-dashboard/profile/${user && user.id}`}>
+                                    <UsersIcon className="text-white min-w-8 w-8" />
+                                </DrawerLink>
+                            </>
+                        )}
+
+                        {/* Tim Magang Routes */}
+                        {user && user.role === "tim-magang" && (
                             <>
                                 <DrawerLink name="Dashboard" isOpen={isOpen} path={"/company-dashboard"}>
                                     <ChartBarIcon className="text-white min-w-8 w-8" />
@@ -118,7 +187,7 @@ const DrawerMobile = () => {
                                 <DrawerLink name="Logbook" isOpen={isOpen} path={"/company-dashboard/logbook"}>
                                     <BookmarkSquareIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
-                                <DrawerLink name="Users" isOpen={isOpen} path={`/company-dashboard/profile-company/${user && user.id}`}>
+                                <DrawerLink name="Profile" isOpen={isOpen} path={`/company-dashboard/profile-company/${user && user.id}`}>
                                     <UsersIcon className="text-white min-w-8 w-8" />
                                 </DrawerLink>
                             </>

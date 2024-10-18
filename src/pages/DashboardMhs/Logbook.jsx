@@ -21,9 +21,10 @@ const Logbook = ({ token }) => {
     const { isLoading, logbookMhs } = useSelector(state => state.logbookMhs)
     const [currentPage, setCurrentPage] = useState(1)
     const [postPerPage, setPostPerPage] = useState(8)
+
     const lastPostIndex = currentPage * postPerPage
     const firsPostIndex = lastPostIndex - postPerPage
-    const currentPost = logbookMhs.slice(firsPostIndex, lastPostIndex)
+    const currentPost = Array.isArray(logbookMhs) ? logbookMhs.slice(firsPostIndex, lastPostIndex) : []
     const { applied } = useSelector(state => state.jobMhs)
     const item = applied.filter(item => item.status === "accepted")
     const [search, setSearch] = useState('')
@@ -63,13 +64,20 @@ const Logbook = ({ token }) => {
             token: token
         }
 
-        dispatch(addLogbookMhs(data))
-        toast.success('Logbook has been created')
-        handleClose()
-        setTimeout(() => {
-            window.location.reload()
-        }, 1500);
+        try {
+            dispatch(addLogbookMhs(data))
+            toast.success("Logbook has been updated")
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500)
+        } catch (error) {
+            if (error.response) {
+                toast.error("Something went wrong")
+            }
+        }
     }
+
+
 
     return (
         <div className='p-4 md:w-[60%] lg:w-[68%] lg:p-8'>
@@ -128,7 +136,7 @@ const Logbook = ({ token }) => {
 
             {!isLoading && (
                 <Pagination
-                    totalPost={logbookMhs.length}
+                    totalPost={logbookMhs && logbookMhs.length}
                     postPerPage={postPerPage}
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}

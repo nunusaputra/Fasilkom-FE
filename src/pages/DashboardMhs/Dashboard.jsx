@@ -1,19 +1,44 @@
 import React, { useEffect } from 'react'
 import { IoIosStar } from "react-icons/io";
-import Cards from '../../components/Cards';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApply, getJob } from '../../redux/Action/ApplyJobAction';
-import { HashLoader } from 'react-spinners';
-import DataNotFound from '../../components/DataNotFound';
-import { IoLocationSharp } from 'react-icons/io5';
-import { FaMoneyCheck } from 'react-icons/fa';
-import { PiBagFill } from 'react-icons/pi';
+import laporan from '../../assets/img/laporan.jpg'
+import bimbingan from '../../assets/img/bimbingan.jpg'
+import logbook from '../../assets/img/logbook.jpg'
+import pengajuan from '../../assets/img/pengajuan.jpg'
 
 const color = {
     "applied": "bg-blue-500",
     "accepted": "bg-green-500",
     "rejected": "bg-third",
 }
+
+const QuickPath = [
+    {
+        id: 1,
+        title: "Logbook Magang",
+        img: logbook,
+        path: "/dashboard/logbook",
+    },
+    {
+        id: 2,
+        title: "Laporan Magang",
+        img: laporan,
+        path: "/dashboard/laporan-magang",
+    },
+    {
+        id: 3,
+        title: "Bimbingan Magang",
+        img: bimbingan,
+        path: "/dashboard/bimbingan",
+    },
+    {
+        id: 4,
+        title: "Pengajuan Magang",
+        img: pengajuan,
+        path: "/dashboard/pengajuan-magang",
+    },
+]
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -56,49 +81,19 @@ const Dashboard = () => {
             </div>
 
             <div className='mt-5'>
-                <h1 className='text-xl font-semibold'>Internship Status</h1>
-                <div className='mt-3 grid grid-cols-1 gap-4 xl:grid-cols-2 '>
-                    {isLoading ? (
-                        <div className='col-span-full mx-auto'>
-                            <HashLoader size={50} color='#ce231c' />
+                <h1 className='text-xl font-semibold'>Quick Access</h1>
+                <div className='mt-3 grid grid-cols-1 gap-4 xl:grid-cols-4 '>
+                    {QuickPath.map(item => (
+                        <div className='w-56 h-64 rounded-lg border-2 border-black p-2 shadow-2xl' key={item.id}>
+                            <div className='w-full h-32 bg-black rounded-lg bg-cover bg-center' style={{ backgroundImage: `url(${item.img})` }} />
+                            <div className='flex flex-col gap-1 justify-center items-center mt-5'>
+                                <h1 className='font-bold text-lg'>{item.title}</h1>
+                                <a href={item.path}>
+                                    <button className='px-4 py-2 bg-black text-white font-semibold rounded-lg'>View Detail</button>
+                                </a>
+                            </div>
                         </div>
-                    ) : (
-                        applied && applied.length > 0 ? (
-                            applied.map(item => (
-                                <div className='bg-[#F5F5F5] px-2 py-2 rounded-md drop-shadow-lg sm:flex sm:justify-between mb-2' key={item.id}>
-                                    <div className='flex gap-2'>
-                                        <div className='w-20 bg-white border-slate-300 rounded-md flex px-1'>
-                                            <img src={item.User.profile === null ? "https://via.placeholder.com/150"
-                                                : item.User.profile} alt={item.User.name} className='self-center'
-                                            />
-                                        </div>
-                                        <div>
-                                            <h1 className='text-lg font-semibold'>{item.job.jobTitle}</h1>
-                                            <div className='flex gap-2 flex-wrap'>
-                                                <div className='flex gap-1'>
-                                                    <IoLocationSharp className='text-sm mt-1' />
-                                                    <h2 className='text-sm'>{item.User.alamat}</h2>
-                                                </div>
-                                                <div className='flex gap-1'>
-                                                    <FaMoneyCheck className='text-sm mt-1' />
-                                                    <h2 className='text-sm'>{item.job.salary.toLocaleString('id-ID')}</h2>
-                                                </div>
-                                                <div className='flex gap-1'>
-                                                    <PiBagFill className='text-sm mt-1' />
-                                                    <h2 className='text-sm'>{item.job.jobType}</h2>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className={`text-white px-4 py-1 rounded-lg mt-2 text-center font-semibold sm:h-8 self-center ${color[item.status]}`}>{item.status}</div>
-                                </div>
-                            ))
-                        ) : (
-                            <DataNotFound>
-                                No Internship Applied
-                            </DataNotFound>
-                        )
-                    )}
+                    ))}
                 </div>
             </div>
         </div>

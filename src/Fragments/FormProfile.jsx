@@ -16,6 +16,8 @@ const FormProfile = ({ user }) => {
         prodi: '',
         tgl_lahir: '',
         semester: '',
+        npm: '',
+        linkRekom: null,
         linkCV: null
     })
 
@@ -72,8 +74,10 @@ const FormProfile = ({ user }) => {
                     alamat: response.data.data.alamat || '',
                     no_hp: response.data.data.no_hp || '',
                     prodi: response.data.data.prodi || '',
+                    npm: response.data.data.npm || '',
                     tgl_lahir: formatDate || '',
                     semester: response.data.data.semester || '',
+                    linkRekom: response.data.data.linkRekom || null,
                     linkCV: response.data.data.linkCV || null
                 })
             } catch (error) {
@@ -171,6 +175,16 @@ const FormProfile = ({ user }) => {
                 </div>
                 <div className='mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2'>
                     <InputForm
+                        label="NPM"
+                        size="mb-3"
+                        style="star-point"
+                        name="npm"
+                        id="npm"
+                        type="text"
+                        value={input.npm}
+                        onChange={handleInput}
+                    />
+                    <InputForm
                         label="Birth Date"
                         size="mb-3"
                         style="star-point"
@@ -180,6 +194,20 @@ const FormProfile = ({ user }) => {
                         value={input.tgl_lahir}
                         onChange={handleInput}
                     />
+                    <div>
+                        <InputForm
+                            label="Surat Rekomendasi"
+                            size="mb-3"
+                            style="star-point"
+                            name="linkRekom"
+                            id="linkRekom"
+                            type="text"
+                            placeholder="https://drive.google.com/file/mycv.pdf"
+                            value={input.linkRekom}
+                            onChange={handleInput}
+                        />
+                        <p className='text-xs text-slate-500'>Drop your cv here</p>
+                    </div>
                     <div>
                         <InputForm
                             label="CV"
@@ -195,7 +223,7 @@ const FormProfile = ({ user }) => {
                         <p className='text-xs text-slate-500'>Drop your cv here</p>
                     </div>
                 </div>
-                <p className='text-sm mt-5 text-slate-500'>Do you want to update your password?{" "}
+                <p className='text-sm mt-8 text-slate-500'>Do you want to update your password?{" "}
                     <Link to={"/dashboard/change-password"}>
                         <span className='text-primary font-semibold hover:underline'>Yes</span>
                     </Link>
